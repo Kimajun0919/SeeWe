@@ -101,12 +101,12 @@ function normalizeIncidents(records: Record<string, unknown>[]): IncidentStatus[
       message: pickString(
         record,
         ["ACDNT_CNTRL_MSG", "ACDNT_CNTRL_DTL", "INCIDENT_MSG", "MESSAGE", "DETAIL"],
-        "No incident detail message is available.",
+        "상세 메시지가 제공되지 않았습니다.",
       ),
       lat: pickNumber(record, ["LAT", "Y", "MAP_LAT"]) ?? undefined,
       lng: pickNumber(record, ["LNG", "X", "MAP_LNG", "LON"]) ?? undefined,
     }))
-    .filter((item) => item.location !== "위치 정보 없음" || item.message !== "No incident detail message is available.");
+    .filter((item) => item.location !== "위치 정보 없음" || item.message !== "상세 메시지가 제공되지 않았습니다.");
 
   return uniqueBy(incidents, (item) => `${item.type}-${item.location}-${item.startedAt ?? ""}`).slice(0, 10);
 }

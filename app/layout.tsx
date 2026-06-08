@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "SeeWe",
-  description: "Real-time Seoul public data crowd density and traffic dashboard.",
+  description: "서울 공공데이터 기반 실시간 주변 혼잡도와 교통 상황 대시보드.",
 };
 
 export default function RootLayout({
@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html lang="ko" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="min-h-full bg-slate-950 text-slate-100">
         <Providers>{children}</Providers>
       </body>

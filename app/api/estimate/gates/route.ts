@@ -18,7 +18,7 @@ type EstimateRequestBody = {
 export async function GET(request: Request) {
   const areaNm = new URL(request.url).searchParams.get("areaNm")?.trim();
   if (!areaNm) {
-    return jsonError("areaNm is required.", 400);
+    return jsonError("areaNm이 필요합니다.", 400);
   }
 
   return estimateForArea({ areaNm });
@@ -34,7 +34,7 @@ export async function POST(request: Request) {
 
   const areaNm = body.areaNm?.trim();
   if (!areaNm) {
-    return jsonError("areaNm is required.", 400);
+    return jsonError("areaNm이 필요합니다.", 400);
   }
 
   return estimateForArea({ ...body, areaNm });
@@ -43,7 +43,7 @@ export async function POST(request: Request) {
 async function estimateForArea(input: EstimateRequestBody & { areaNm: string }) {
   const areaConfig = input.areaConfig ?? getAreaConfig(input.areaNm);
   if (!areaConfig) {
-    return jsonError(`Unknown areaNm: ${input.areaNm}`, 404);
+    return jsonError(`알 수 없는 areaNm입니다: ${input.areaNm}`, 404);
   }
 
   try {
@@ -57,7 +57,7 @@ async function estimateForArea(input: EstimateRequestBody & { areaNm: string }) 
       },
     });
   } catch (error) {
-    return jsonError(error instanceof Error ? error.message : "Gate estimate failed.", statusFromError(error));
+    return jsonError(error instanceof Error ? error.message : "출입구 추정 계산에 실패했습니다.", statusFromError(error));
   }
 }
 

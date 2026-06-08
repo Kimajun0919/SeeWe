@@ -29,14 +29,14 @@ export function normalizePopulation(raw: unknown, appFetchedAt = new Date().toIS
     firstRecordWithAnyKey(raw, populationKeys);
 
   if (!populationRecord) {
-    throw new Error("Missing Seoul population status fields in API response.");
+    throw new Error("서울 실시간 인구 응답에서 인구 상태 필드를 찾을 수 없습니다.");
   }
 
   const populationMin = toRoundedNumber(pickValue(populationRecord, ["AREA_PPLTN_MIN"]));
   const populationMax = toRoundedNumber(pickValue(populationRecord, ["AREA_PPLTN_MAX"]));
 
   if (populationMin === 0 && populationMax === 0) {
-    throw new Error("Missing population range in Seoul API response.");
+    throw new Error("서울 API 응답에서 인구 범위를 찾을 수 없습니다.");
   }
 
   const forecastValue =
@@ -69,7 +69,7 @@ export function normalizePopulation(raw: unknown, appFetchedAt = new Date().toIS
     areaName: pickString(populationRecord, ["AREA_NM"], pickString(areaRecord, ["AREA_NM"], "")),
     areaCode: pickString(populationRecord, ["AREA_CD"], pickString(areaRecord, ["AREA_CD"], "")),
     congestionLevel: normalizeCongestionLevel(pickString(populationRecord, ["AREA_CONGEST_LVL"], "정보없음")),
-    congestionMessage: pickString(populationRecord, ["AREA_CONGEST_MSG"], "No congestion message is available."),
+    congestionMessage: pickString(populationRecord, ["AREA_CONGEST_MSG"], "현재 제공된 혼잡도 안내 문구가 없습니다."),
     populationMin,
     populationMax,
     populationMid: Math.round((populationMin + populationMax) / 2),

@@ -16,13 +16,13 @@ export function GateEstimateCard({ estimate }: GateEstimateCardProps) {
             {formatPopulation(estimate.estimatedMin)} - {formatPopulation(estimate.estimatedMax)}
           </p>
         </div>
-        <StatusBadge tone="warning">Estimated</StatusBadge>
+        <StatusBadge tone="warning">추정</StatusBadge>
       </div>
 
       <div className="mt-4 flex flex-wrap gap-2">
         <StatusBadge level={estimate.congestionLevel}>{estimate.congestionLevel}</StatusBadge>
         <StatusBadge tone={estimate.confidence === "높음" ? "success" : estimate.confidence === "낮음" ? "danger" : "info"}>
-          Confidence {estimate.confidence}
+          신뢰도 {estimate.confidence}
         </StatusBadge>
       </div>
 

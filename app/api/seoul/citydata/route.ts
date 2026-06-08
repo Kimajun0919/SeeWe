@@ -7,7 +7,7 @@ export const revalidate = 10;
 export async function GET(request: Request) {
   const areaNm = new URL(request.url).searchParams.get("areaNm")?.trim();
   if (!areaNm) {
-    return jsonError("areaNm is required.", 400);
+    return jsonError("areaNm이 필요합니다.", 400);
   }
 
   try {
@@ -16,7 +16,7 @@ export async function GET(request: Request) {
       headers: cacheHeaders(),
     });
   } catch (error) {
-    return jsonError(error instanceof Error ? error.message : "City data request failed.", statusFromError(error));
+    return jsonError(error instanceof Error ? error.message : "도시데이터 요청에 실패했습니다.", statusFromError(error));
   }
 }
 

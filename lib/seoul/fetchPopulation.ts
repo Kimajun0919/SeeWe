@@ -25,7 +25,7 @@ export class SeoulApiError extends Error {
 export async function fetchPopulation(areaNm: string): Promise<SeoulPopulation> {
   const normalizedAreaNm = areaNm.trim();
   if (!normalizedAreaNm) {
-    throw new SeoulApiError("areaNm is required.", 400);
+    throw new SeoulApiError("areaNm이 필요합니다.", 400);
   }
 
   const cached = populationCache.get(normalizedAreaNm);
@@ -35,7 +35,7 @@ export async function fetchPopulation(areaNm: string): Promise<SeoulPopulation> 
 
   const key = process.env.SEOUL_OPEN_API_KEY;
   if (!key) {
-    throw new SeoulApiError("SEOUL_OPEN_API_KEY is not configured.", 500);
+    throw new SeoulApiError("SEOUL_OPEN_API_KEY가 설정되지 않았습니다.", 500);
   }
 
   const url = `${SEOUL_OPEN_API_BASE_URL}/${encodeURIComponent(key)}/json/citydata_ppltn/1/5/${encodeURIComponent(
@@ -51,30 +51,30 @@ export async function fetchPopulation(areaNm: string): Promise<SeoulPopulation> 
       },
     });
   } catch (error) {
-    throw new SeoulApiError(`Seoul population API network error: ${stringifyError(error)}`);
+    throw new SeoulApiError(`서울 인구 API 네트워크 오류: ${stringifyError(error)}`);
   }
 
   if (!response.ok) {
-    throw new SeoulApiError(`Seoul population API returned HTTP ${response.status}.`, response.status);
+    throw new SeoulApiError(`서울 인구 API가 HTTP ${response.status}를 반환했습니다.`, response.status);
   }
 
   let payload: unknown;
   try {
     payload = await response.json();
   } catch (error) {
-    throw new SeoulApiError(`Failed to parse Seoul population JSON: ${stringifyError(error)}`);
+    throw new SeoulApiError(`서울 인구 JSON 파싱에 실패했습니다: ${stringifyError(error)}`);
   }
 
   const result = extractResult(payload);
   if (result.code && result.code !== "INFO-000") {
-    throw new SeoulApiError(result.message || `Seoul population API returned ${result.code}.`);
+    throw new SeoulApiError(result.message || `서울 인구 API가 ${result.code}를 반환했습니다.`);
   }
 
   let normalized: SeoulPopulation;
   try {
     normalized = normalizePopulation(payload);
   } catch (error) {
-    throw new SeoulApiError(`Failed to normalize Seoul population data: ${stringifyError(error)}`);
+    throw new SeoulApiError(`서울 인구 데이터 정규화에 실패했습니다: ${stringifyError(error)}`);
   }
 
   populationCache.set(normalizedAreaNm, {

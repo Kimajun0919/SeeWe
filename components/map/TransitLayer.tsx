@@ -16,7 +16,7 @@ export function TransitLayer({ areaConfig, project }: TransitLayerProps) {
             className="absolute z-10 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-200/40 bg-cyan-950/80 px-2 py-1 text-[11px] font-medium text-cyan-100 shadow-lg"
             style={{ left: `${point.x}%`, top: `${point.y}%` }}
           >
-            {anchor.type === "subway" ? "Subway" : "Bus"}: {anchor.name}
+            {anchor.type === "subway" ? "지하철" : "버스"}: {anchor.name}
           </div>
         );
       })}

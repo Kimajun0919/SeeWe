@@ -8,16 +8,16 @@ export function ForecastChart({ forecast }: { forecast: SeoulPopulation["forecas
   if (forecast.length === 0) {
     return (
       <section className="rounded-3xl border border-white/10 bg-white/[0.06] p-4">
-        <h3 className="font-semibold text-white">12-hour forecast</h3>
-        <p className="mt-2 text-sm text-slate-400">No public data available.</p>
+        <h3 className="font-semibold text-white">12시간 예측</h3>
+        <p className="mt-2 text-sm text-slate-400">공개 데이터가 아직 없습니다.</p>
       </section>
     );
   }
 
   return (
     <section className="h-80 rounded-3xl border border-white/10 bg-white/[0.06] p-4">
-      <h3 className="font-semibold text-white">12-hour Population Forecast</h3>
-      <p className="mt-1 text-xs text-slate-400">Minimum and maximum population forecast from Seoul public data.</p>
+      <h3 className="font-semibold text-white">12시간 인구 예측</h3>
+      <p className="mt-1 text-xs text-slate-400">서울시 공개 데이터의 최소·최대 예측 인구입니다.</p>
       <ResponsiveContainer width="100%" height="82%">
         <LineChart data={forecast}>
           <CartesianGrid stroke="rgba(148,163,184,0.18)" vertical={false} />
@@ -32,7 +32,7 @@ export function ForecastChart({ forecast }: { forecast: SeoulPopulation["forecas
             }}
             formatter={(value, name) => [
               formatPopulation(Number(value)),
-              name === "populationMin" ? "Forecast min" : "Forecast max",
+              name === "populationMin" ? "예측 최소" : "예측 최대",
             ]}
           />
           <Line type="monotone" dataKey="populationMin" stroke="#38bdf8" strokeWidth={2} dot={false} />

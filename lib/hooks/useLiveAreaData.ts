@@ -70,7 +70,7 @@ export function useLiveAreaData(areaNm: string) {
 
   const errorMessage = useMemo(() => {
     const error = populationQuery.error ?? cityDataQuery.error ?? gateEstimateQuery.error;
-    return error instanceof Error ? error.message : "Data reception delayed.";
+    return error instanceof Error ? error.message : "데이터 수신이 지연되고 있습니다.";
   }, [cityDataQuery.error, gateEstimateQuery.error, populationQuery.error]);
 
   return {
@@ -123,7 +123,7 @@ async function fetchJson<T>(url: string): Promise<T> {
       body = {};
     }
 
-    throw new Error(body.error || `Request failed with HTTP ${response.status}.`);
+    throw new Error(body.error || `요청이 실패했습니다. HTTP ${response.status}`);
   }
 
   return (await response.json()) as T;

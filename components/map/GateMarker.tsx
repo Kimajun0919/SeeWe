@@ -19,9 +19,9 @@ export function GateMarker({ estimate, x, y, size, isSelected, onSelect }: GateM
         onClick={() => onSelect(estimate.gateId)}
         className="flex items-center justify-center rounded-full border-2 border-white/80 bg-sky-400/80 text-[10px] font-bold text-slate-950 shadow-xl shadow-slate-950/40 backdrop-blur transition hover:scale-105"
         style={{ width: size, height: size }}
-        aria-label={`${estimate.gateName} estimated population`}
+        aria-label={`${estimate.gateName} 추정 인구`}
       >
-        {Math.round(estimate.estimatedMid / 100) / 10}k
+        {Math.round(estimate.estimatedMid / 100) / 10}천
       </button>
 
       {isSelected ? (
@@ -30,14 +30,16 @@ export function GateMarker({ estimate, x, y, size, isSelected, onSelect }: GateM
             <div>
               <p className="font-semibold text-white">{estimate.gateName}</p>
               <p className="mt-1 text-xs text-slate-300">
-                Estimated {formatPopulation(estimate.estimatedMin)} - {formatPopulation(estimate.estimatedMax)}
+                추정 {formatPopulation(estimate.estimatedMin)} - {formatPopulation(estimate.estimatedMax)}
               </p>
             </div>
-            <StatusBadge tone="warning">Estimated</StatusBadge>
+            <StatusBadge tone="warning">추정</StatusBadge>
           </div>
           <div className="mt-3 flex flex-wrap gap-2">
             <StatusBadge level={estimate.congestionLevel}>{estimate.congestionLevel}</StatusBadge>
-            <StatusBadge tone={estimate.confidence === "낮음" ? "danger" : "info"}>{estimate.confidence}</StatusBadge>
+            <StatusBadge tone={estimate.confidence === "낮음" ? "danger" : "info"}>
+              신뢰도 {estimate.confidence}
+            </StatusBadge>
           </div>
           <ul className="mt-3 space-y-1 text-xs text-slate-300">
             {estimate.reasons.slice(0, 3).map((reason) => (

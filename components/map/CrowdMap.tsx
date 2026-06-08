@@ -39,17 +39,17 @@ declare global {
     kakao?: {
       maps: KakaoMapsApi;
     };
-    __crowdScopeKakaoLoading?: Promise<void>;
+    __seeWeKakaoLoading?: Promise<void>;
   }
 }
 
 const layerLabels: Record<MapLayerKey, string> = {
-  population: "Population",
-  entrances: "Entrances",
-  roadTraffic: "Road traffic",
-  incidents: "Incidents/controls",
-  publicTransit: "Public transit",
-  parking: "Parking",
+  population: "인구",
+  entrances: "출입구",
+  roadTraffic: "도로 교통",
+  incidents: "사고/통제",
+  publicTransit: "대중교통",
+  parking: "주차",
 };
 
 export function CrowdMap({ areaConfig, estimates, cityData }: CrowdMapProps) {
@@ -74,7 +74,7 @@ export function CrowdMap({ areaConfig, estimates, cityData }: CrowdMapProps) {
             weight: gate.baseWeight,
             congestionLevel: "정보없음" as const,
             confidence: "낮음" as const,
-            reasons: ["Waiting for Seoul public data."],
+            reasons: ["서울시 공개 데이터를 기다리는 중입니다."],
             isEstimated: true as const,
           })),
     [areaConfig.gates, estimates],
@@ -160,9 +160,9 @@ export function CrowdMap({ areaConfig, estimates, cityData }: CrowdMapProps) {
               removable: true,
               content: `<div style="padding:10px;font-size:12px;line-height:1.5"><strong>${escapeHtml(
                 estimate.gateName,
-              )}</strong><br/>Estimated ${escapeHtml(formatPopulation(estimate.estimatedMin))} - ${escapeHtml(
+              )}</strong><br/>추정 ${escapeHtml(formatPopulation(estimate.estimatedMin))} - ${escapeHtml(
                 formatPopulation(estimate.estimatedMax),
-              )}<br/>Congestion: ${escapeHtml(estimate.congestionLevel)}<br/>Confidence: ${escapeHtml(
+              )}<br/>혼잡도: ${escapeHtml(estimate.congestionLevel)}<br/>신뢰도: ${escapeHtml(
                 estimate.confidence,
               )}</div>`,
             });
@@ -200,11 +200,11 @@ export function CrowdMap({ areaConfig, estimates, cityData }: CrowdMapProps) {
     <section className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.06] shadow-2xl shadow-slate-950/25">
       <div className="flex flex-col gap-3 border-b border-white/10 p-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <h3 className="font-semibold text-white">Real-time Site Map</h3>
+          <h3 className="font-semibold text-white">실시간 현장 지도</h3>
           <p className="mt-1 text-xs text-slate-400">
             {sdkStatus === "ready"
-              ? "Kakao Maps SDK active with estimated entrance markers."
-              : "Schematic fallback map. Add NEXT_PUBLIC_KAKAO_MAP_KEY to enable Kakao Maps."}
+              ? "카카오 지도에 출입구별 추정 인구 마커를 표시합니다."
+              : "카카오 지도 키가 없어서 간이 지도를 표시합니다. NEXT_PUBLIC_KAKAO_MAP_KEY를 설정하면 카카오 지도가 활성화됩니다."}
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -270,7 +270,7 @@ export function CrowdMap({ areaConfig, estimates, cityData }: CrowdMapProps) {
                   className="absolute z-10 -translate-x-1/2 -translate-y-1/2 rounded-full border border-amber-200/40 bg-amber-950/80 px-2 py-1 text-[11px] font-medium text-amber-100 shadow-lg"
                   style={{ left: `${point.x}%`, top: `${point.y}%` }}
                 >
-                  Parking: {anchor.name}
+                  주차: {anchor.name}
                 </div>
               );
             })
@@ -278,8 +278,7 @@ export function CrowdMap({ areaConfig, estimates, cityData }: CrowdMapProps) {
 
         <MapLegend estimates={displayEstimates} />
         <div className="absolute bottom-4 left-4 z-30 max-w-sm rounded-2xl border border-white/15 bg-slate-950/85 p-3 text-xs text-slate-300 shadow-xl backdrop-blur">
-          This map visualizes surrounding crowd density estimates only. It does not identify individuals or group
-          membership.
+          이 지도는 주변 혼잡도 추정치를 참고용으로 시각화합니다. 개인 위치, 특정 단체, 참여자 규모를 식별하거나 추적하지 않습니다.
         </div>
       </div>
     </section>
@@ -303,26 +302,26 @@ function loadKakaoSdk(appKey: string): Promise<void> {
     return Promise.resolve();
   }
 
-  if (window.__crowdScopeKakaoLoading) {
-    return window.__crowdScopeKakaoLoading;
+  if (window.__seeWeKakaoLoading) {
+    return window.__seeWeKakaoLoading;
   }
 
-  window.__crowdScopeKakaoLoading = new Promise((resolve, reject) => {
+  window.__seeWeKakaoLoading = new Promise((resolve, reject) => {
     const script = document.createElement("script");
     script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${encodeURIComponent(appKey)}&autoload=false`;
     script.async = true;
     script.onload = () => {
       if (!window.kakao?.maps) {
-        reject(new Error("Kakao Maps SDK loaded without maps object."));
+        reject(new Error("카카오 지도 SDK가 정상적으로 로드되지 않았습니다."));
         return;
       }
       window.kakao.maps.load(resolve);
     };
-    script.onerror = () => reject(new Error("Failed to load Kakao Maps SDK."));
+    script.onerror = () => reject(new Error("카카오 지도 SDK를 불러오지 못했습니다."));
     document.head.appendChild(script);
   });
 
-  return window.__crowdScopeKakaoLoading;
+  return window.__seeWeKakaoLoading;
 }
 
 function escapeHtml(value: string): string {

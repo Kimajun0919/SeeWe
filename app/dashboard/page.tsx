@@ -30,17 +30,17 @@ export default function DashboardPage() {
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-sky-200">SeeWe</p>
             <h1 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Real-time crowd density and traffic dashboard
+              실시간 주변 혼잡도와 교통 상황 대시보드
             </h1>
             <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-300">
-              MVP focus: Olympic Park Handball Gymnasium. The service checks Seoul public data every 10 seconds and
-              displays surrounding population and entrance-level estimates as reference data.
+              MVP 대상지는 올림픽공원 핸드볼경기장 주변입니다. SeeWe는 서울시 공개 데이터를 10초마다 확인하고
+              주변 추정 인구와 출입구별 추정 분포를 참고용으로 보여줍니다.
             </p>
           </div>
 
           <div className="flex flex-col gap-2 sm:min-w-72">
             <label htmlFor="area-select" className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
-              Area selector
+              권역 선택
             </label>
             <select
               id="area-select"
@@ -55,7 +55,7 @@ export default function DashboardPage() {
               ))}
             </select>
             <Link href="/settings/areas" className="text-xs font-medium text-sky-200 hover:text-sky-100">
-              Manage area configuration
+              권역 설정 보기
             </Link>
             <a
               href={feedbackFormUrl}
@@ -119,20 +119,14 @@ export default function DashboardPage() {
         </section>
 
         <section className="grid gap-3 rounded-3xl border border-white/10 bg-slate-950/60 p-5 text-sm leading-6 text-slate-300">
-          <p>This service is a reference tool for surrounding crowd density based on Seoul public data.</p>
+          <p>이 서비스는 서울시 공개 데이터를 기반으로 주변 혼잡도를 참고용으로 보여주는 도구입니다.</p>
           <p>
-            Entrance-level population is not an actual measured value. It is an estimate based on population, traffic,
-            and location data.
+            출입구별 인구는 실제 측정값이 아닙니다. 전체 권역 인구, 교통, 위치 데이터를 바탕으로 계산한 추정값입니다.
           </p>
+          <p>이 서비스는 개인 위치, 특정 단체, 집회 참여자 수를 식별하거나 추적하지 않습니다.</p>
+          <p>현장 안전 판단은 경찰, 지자체, 시설 관리자 등 공식 안내를 우선해 주세요.</p>
           <p>
-            This service does not identify or track protest participants, specific group sizes, or individual locations.
-          </p>
-          <p>
-            For safety decisions on site, follow official guidance from police, local government, and facility managers.
-          </p>
-          <p>
-            Even though the app checks for updates every 10 seconds, displayed values may not change immediately
-            depending on the Seoul source data update interval.
+            앱은 10초마다 최신 데이터를 확인하지만, 서울시 원천 데이터 갱신 주기에 따라 표시값이 즉시 바뀌지 않을 수 있습니다.
           </p>
         </section>
       </div>

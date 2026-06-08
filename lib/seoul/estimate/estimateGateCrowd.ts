@@ -21,7 +21,7 @@ export function estimateGateCrowd(
     areaConfig.gates.map((gate) => ({
       gate,
       weight: gate.baseWeight,
-      reasons: ["Base entrance distribution from area configuration."],
+      reasons: ["기본 출입구 분포 가중치를 반영했습니다."],
     })),
   );
 
@@ -77,8 +77,8 @@ function applySignals(weightedGate: WeightedGate, cityData: SeoulCityData, areaC
     weight += anchor.influenceWeight * closeness * dataMultiplier;
     reasons.push(
       hasMatchingPublicData
-        ? `${anchor.name} public transit signal is near this entrance.`
-        : `${anchor.name} is a nearby transit access point.`,
+        ? `${anchor.name} 대중교통 데이터가 이 출입구와 가깝습니다.`
+        : `${anchor.name} 접근성이 이 출입구 유입에 영향을 줄 수 있습니다.`,
     );
   }
 
@@ -94,8 +94,8 @@ function applySignals(weightedGate: WeightedGate, cityData: SeoulCityData, areaC
     weight += anchor.influenceWeight * closeness * parkingMultiplier;
     reasons.push(
       matchingParking
-        ? `${matchingParking.parkingName} parking availability affects vehicle access.`
-        : `${anchor.name} can influence vehicle arrivals.`,
+        ? `${matchingParking.parkingName} 주차 여유 정보가 차량 접근에 영향을 줍니다.`
+        : `${anchor.name} 위치가 차량 유입에 영향을 줄 수 있습니다.`,
     );
   }
 
@@ -110,7 +110,7 @@ function applySignals(weightedGate: WeightedGate, cityData: SeoulCityData, areaC
     const congestionMultiplier = relatedTraffic ? trafficAdjustment(relatedTraffic) : 0.35;
     weight += anchor.influenceWeight * closeness * congestionMultiplier;
     if (relatedTraffic) {
-      reasons.push(`${relatedTraffic.roadName} is ${relatedTraffic.status} near this entrance.`);
+      reasons.push(`${relatedTraffic.roadName} 교통 상태가 ${relatedTraffic.status}입니다.`);
     }
   }
 
@@ -124,10 +124,10 @@ function applySignals(weightedGate: WeightedGate, cityData: SeoulCityData, areaC
 
   if (nearbyIncident) {
     weight += 0.08;
-    reasons.push(`Nearby incident/control signal: ${nearbyIncident.type}.`);
+    reasons.push(`인근 사고/통제 신호가 있습니다: ${nearbyIncident.type}.`);
   } else if (cityData.incidents.length > 0) {
     weight += 0.03;
-    reasons.push("Area-level incident/control data is present.");
+    reasons.push("권역 내 사고/통제 데이터가 반영되었습니다.");
   }
 
   return {
