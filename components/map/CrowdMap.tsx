@@ -396,7 +396,7 @@ export function CrowdMap({ areaConfig, estimates, cityData }: CrowdMapProps) {
             })
           : null}
 
-        <div ref={infoPanelRef} className="absolute bottom-4 left-4 z-30">
+        <div ref={infoPanelRef} className="absolute bottom-4 right-4 z-30">
           <button
             type="button"
             aria-expanded={isInfoPanelOpen}
@@ -408,7 +408,7 @@ export function CrowdMap({ areaConfig, estimates, cityData }: CrowdMapProps) {
           </button>
 
           {isInfoPanelOpen ? (
-            <div className="absolute bottom-14 left-0 w-[min(22rem,calc(100vw-2rem))] rounded-3xl border border-white/15 bg-slate-950/95 p-4 text-xs leading-5 text-slate-300 shadow-2xl shadow-slate-950/40 backdrop-blur">
+            <div className="absolute bottom-14 right-0 w-[min(22rem,calc(100vw-2rem))] rounded-3xl border border-white/15 bg-slate-950/95 p-4 text-xs leading-5 text-slate-300 shadow-2xl shadow-slate-950/40 backdrop-blur">
               <p className="font-semibold text-white">인구 추정치 기준</p>
               <div className="mt-3 grid gap-2">
                 <PopulationCriterion colorClass="bg-emerald-400" label="초록" value="500명 미만" />
