@@ -1,12 +1,13 @@
 "use client";
 
-import Link from "next/link";
 import { useMemo, useState } from "react";
 import { BrandLogo } from "@/components/common/BrandLogo";
 import { ErrorNotice } from "@/components/common/ErrorNotice";
 import { LoadingSkeleton } from "@/components/common/LoadingSkeleton";
-import { areaConfigs, defaultAreaNm, getAreaConfig, getDefaultAreaConfig } from "@/lib/config/areas";
+import { defaultAreaNm, getAreaConfig as getStaticAreaConfig } from "@/lib/config/areas";
+import { useLocalAreaConfigs } from "@/lib/hooks/useLocalAreaConfigs";
 import { useLiveAreaData } from "@/lib/hooks/useLiveAreaData";
+import { DashboardMenu } from "./DashboardMenu";
 import { ForecastChart } from "./ForecastChart";
 import { GateEstimateCard } from "./GateEstimateCard";
 import { GateEstimateChart } from "./GateEstimateChart";
@@ -19,12 +20,15 @@ type DashboardDetailsClientProps = {
 };
 
 export function DashboardDetailsClient({ initialAreaNm }: DashboardDetailsClientProps) {
-  const initialAreaConfig = initialAreaNm ? getAreaConfig(initialAreaNm) : undefined;
+  const { areaConfigs, getAreaConfig, getDefaultAreaConfig } = useLocalAreaConfigs();
+  const initialAreaConfig = initialAreaNm ? getStaticAreaConfig(initialAreaNm) : undefined;
   const [areaNm, setAreaNm] = useState(initialAreaConfig?.areaNm ?? defaultAreaNm);
-  const areaConfig = useMemo(() => getAreaConfig(areaNm) ?? getDefaultAreaConfig(), [areaNm]);
-  const live = useLiveAreaData(areaConfig.areaNm);
+  const areaConfig = useMemo(
+    () => getAreaConfig(areaNm) ?? getDefaultAreaConfig(),
+    [areaNm, getAreaConfig, getDefaultAreaConfig],
+  );
+  const live = useLiveAreaData(areaConfig);
   const cityData = live.cityData;
-  const dashboardHref = `/dashboard?area=${encodeURIComponent(areaConfig.areaNm)}`;
 
   return (
     <main className="min-h-dvh overflow-x-hidden bg-[radial-gradient(circle_at_top,rgba(14,165,233,0.18),transparent_36%),#020617] px-3 py-4 text-slate-100 sm:px-6 sm:py-6 lg:px-8">
@@ -35,29 +39,12 @@ export function DashboardDetailsClient({ initialAreaNm }: DashboardDetailsClient
               <BrandLogo />
             </div>
 
-            <div className="flex w-full flex-col gap-2 lg:w-80">
-              <label htmlFor="details-area-select" className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
-                권역 선택
-              </label>
-              <select
-                id="details-area-select"
-                value={areaConfig.areaNm}
-                onChange={(event) => setAreaNm(event.target.value)}
-                className="min-h-12 w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-sm font-semibold text-white outline-none ring-sky-300 transition focus:ring-2"
-              >
-                {areaConfigs.map((area) => (
-                  <option key={area.areaNm} value={area.areaNm}>
-                    {area.displayName}
-                  </option>
-                ))}
-              </select>
-              <Link
-                href={dashboardHref}
-                className="inline-flex min-h-11 items-center justify-center rounded-2xl border border-white/10 px-4 py-2 text-sm font-semibold text-sky-100 transition hover:bg-white/10"
-              >
-                대시보드로 돌아가기
-              </Link>
-            </div>
+            <DashboardMenu
+              areaNm={areaConfig.areaNm}
+              areaOptions={areaConfigs}
+              currentPage="details"
+              onAreaChange={setAreaNm}
+            />
           </div>
         </header>
 

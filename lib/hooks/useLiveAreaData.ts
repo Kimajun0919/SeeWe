@@ -2,6 +2,7 @@
 
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import type { AreaConfig } from "@/types/area";
 import type { GateEstimate } from "@/types/estimate";
 import type { SeoulCityData, SeoulPopulation } from "@/types/seoul";
 import { useCountdown } from "./useCountdown";
@@ -12,7 +13,8 @@ type ApiErrorBody = {
   error?: string;
 };
 
-export function useLiveAreaData(areaNm: string) {
+export function useLiveAreaData(areaConfig: AreaConfig) {
+  const areaNm = areaConfig.areaNm;
   const encodedAreaNm = encodeURIComponent(areaNm);
 
   const populationQuery = useQuery({
@@ -38,8 +40,18 @@ export function useLiveAreaData(areaNm: string) {
   });
 
   const gateEstimateQuery = useQuery({
-    queryKey: ["gate-estimates", areaNm],
-    queryFn: () => fetchJson<GateEstimate[]>(`/api/estimate/gates?areaNm=${encodedAreaNm}`),
+    queryKey: ["gate-estimates", areaNm, areaConfig],
+    queryFn: () =>
+      fetchJson<GateEstimate[]>("/api/estimate/gates", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          areaNm,
+          areaConfig,
+        }),
+      }),
     enabled: Boolean(areaNm),
     refetchInterval: LIVE_REFRESH_INTERVAL_MS,
     refetchIntervalInBackground: false,
@@ -110,9 +122,11 @@ function useSourceWaiting(sourceUpdatedAt: string | null, dataUpdatedAt: number)
   return isWaiting;
 }
 
-async function fetchJson<T>(url: string): Promise<T> {
+async function fetchJson<T>(url: string, init?: RequestInit): Promise<T> {
   const response = await fetch(url, {
+    ...init,
     cache: "no-store",
+    headers: new Headers(init?.headers),
   });
 
   if (!response.ok) {

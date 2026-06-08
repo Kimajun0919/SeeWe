@@ -5,8 +5,10 @@ import { estimateGateCrowd } from "@/lib/seoul/estimate/estimateGateCrowd";
 import type { AreaConfig } from "@/types/area";
 import type { SeoulCityData, SeoulPopulation } from "@/types/seoul";
 
+const API_CACHE_SECONDS = 5 * 60;
+
 export const runtime = "nodejs";
-export const revalidate = 10;
+export const revalidate = API_CACHE_SECONDS;
 
 type EstimateRequestBody = {
   areaNm?: string;
@@ -52,9 +54,7 @@ async function estimateForArea(input: EstimateRequestBody & { areaNm: string }) 
     const estimates = estimateGateCrowd(population, cityData, areaConfig);
 
     return Response.json(estimates, {
-      headers: {
-        "Cache-Control": "public, s-maxage=10, stale-while-revalidate=10",
-      },
+      headers: input.areaConfig ? noStoreHeaders() : cacheHeaders(),
     });
   } catch (error) {
     return jsonError(error instanceof Error ? error.message : "출입구 추정 계산에 실패했습니다.", statusFromError(error));
@@ -81,6 +81,18 @@ function jsonError(message: string, status: number) {
       },
     },
   );
+}
+
+function cacheHeaders() {
+  return {
+    "Cache-Control": `public, s-maxage=${API_CACHE_SECONDS}, stale-while-revalidate=${API_CACHE_SECONDS}`,
+  };
+}
+
+function noStoreHeaders() {
+  return {
+    "Cache-Control": "no-store",
+  };
 }
 
 function statusFromError(error: unknown): number {

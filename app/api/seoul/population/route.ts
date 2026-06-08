@@ -1,7 +1,9 @@
 import { fetchPopulation, SeoulApiError } from "@/lib/seoul/fetchPopulation";
 
+const API_CACHE_SECONDS = 5 * 60;
+
 export const runtime = "nodejs";
-export const revalidate = 10;
+export const revalidate = API_CACHE_SECONDS;
 
 export async function GET(request: Request) {
   const areaNm = new URL(request.url).searchParams.get("areaNm")?.trim();
@@ -39,6 +41,6 @@ function statusFromError(error: unknown): number {
 
 function cacheHeaders() {
   return {
-    "Cache-Control": "public, s-maxage=10, stale-while-revalidate=10",
+    "Cache-Control": `public, s-maxage=${API_CACHE_SECONDS}, stale-while-revalidate=${API_CACHE_SECONDS}`,
   };
 }
