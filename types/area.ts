@@ -18,9 +18,13 @@ export type AreaConfig = {
   parkingAnchors: ParkingAnchor[];
 };
 
+export type GateType = "public" | "vip_operation" | "player" | "staff";
+
 export type GateConfig = {
   id: string;
+  gateNo?: string;
   name: string;
+  type?: GateType;
   lat: number;
   lng: number;
   radiusM: number;

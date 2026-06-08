@@ -56,6 +56,8 @@ export default function AreaSettingsPage() {
                   <div key={gate.id} className="rounded-2xl bg-slate-950/50 p-3 text-sm">
                     <p className="break-keep font-medium text-white">{gate.name}</p>
                     <p className="mt-1 break-words text-xs leading-5 text-slate-400">
+                      {gate.gateNo ? `${gate.gateNo} - ` : ""}
+                      {gate.type ? `${gate.type} - ` : ""}
                       {gate.lat}, {gate.lng} - 반경 {gate.radiusM}m - 기본 가중치 {gate.baseWeight}
                     </p>
                   </div>

@@ -1,8 +1,11 @@
+import type { GateType } from "./area";
 import type { ConfidenceLevel, NormalizedCongestionLevel } from "./seoul";
 
 export type GateEstimate = {
   gateId: string;
+  gateNo?: string;
   gateName: string;
+  gateType?: GateType;
   lat: number;
   lng: number;
   estimatedMin: number;

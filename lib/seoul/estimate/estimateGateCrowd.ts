@@ -42,7 +42,9 @@ export function estimateGateCrowd(
 
     return {
       gateId: gate.id,
+      gateNo: gate.gateNo,
       gateName: gate.name,
+      gateType: gate.type,
       lat: gate.lat,
       lng: gate.lng,
       estimatedMin,

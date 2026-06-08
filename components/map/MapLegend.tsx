@@ -7,7 +7,7 @@ export function MapLegend({ estimates }: { estimates: GateEstimate[] }) {
   const max = values.length > 0 ? Math.max(...values) : null;
 
   return (
-    <div className="absolute right-4 top-4 z-30 max-w-40 rounded-2xl border border-white/15 bg-slate-950/85 p-3 text-xs text-slate-200 shadow-xl backdrop-blur sm:bottom-4 sm:top-auto sm:max-w-none">
+    <div className="pointer-events-none absolute right-4 top-4 z-30 max-w-40 rounded-2xl border border-white/15 bg-slate-950/85 p-3 text-xs text-slate-200 shadow-xl backdrop-blur sm:bottom-4 sm:top-auto sm:max-w-none">
       <p className="font-semibold text-white">인구 범례</p>
       <div className="mt-2 flex items-center gap-2">
         <span className="h-3 w-3 rounded-full bg-sky-300" />
