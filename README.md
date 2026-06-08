@@ -15,7 +15,7 @@ The app does not call non-public Seoul map internals. The official manual descri
 
 ## Environment Variables
 
-Create `.env` in the project root:
+Create `.env` in the project root for local development. Use `.env.example` as the template:
 
 ```bash
 SEOUL_OPEN_API_KEY=your_seoul_open_api_key
@@ -25,7 +25,7 @@ NEXT_PUBLIC_FEEDBACK_FORM_URL=https://forms.gle/yhT166DZaKZsrxi37
 
 `SEOUL_OPEN_API_KEY` is used only by server Route Handlers and is never exposed to the browser. `NEXT_PUBLIC_KAKAO_MAP_KEY` is optional for local development; without it, the dashboard renders a schematic fallback map.
 
-## Run
+## Run Locally
 
 ```bash
 npm install
@@ -42,6 +42,33 @@ npm run build
 ```
 
 On Windows PowerShell with script execution blocked, use `npm.cmd run lint` and `npm.cmd run build`.
+
+## Deploy On Vercel
+
+Vercel is the recommended deployment target for this Next.js App Router project. It auto-detects Next.js, installs dependencies, and runs `npm run build` by default.
+
+1. Push this repository to GitHub, GitLab, or Bitbucket.
+2. In Vercel, create a new project and import the repository.
+3. Keep the framework preset as `Next.js`.
+4. Add these environment variables in Project Settings -> Environment Variables for Production and Preview:
+
+```bash
+SEOUL_OPEN_API_KEY=your_seoul_open_api_key
+NEXT_PUBLIC_KAKAO_MAP_KEY=your_kakao_javascript_map_key
+NEXT_PUBLIC_FEEDBACK_FORM_URL=https://forms.gle/yhT166DZaKZsrxi37
+```
+
+5. Deploy. The root path redirects to `/dashboard`.
+
+CLI deployment is also supported:
+
+```bash
+npm i -g vercel
+vercel
+vercel --prod
+```
+
+Do not rely on local `.env` being uploaded. Vercel reads deployment variables from its project settings.
 
 ## Routes
 
