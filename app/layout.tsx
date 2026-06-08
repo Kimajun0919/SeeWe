@@ -15,14 +15,14 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "SeeWe",
-  description: "서울 공공데이터 기반 실시간 주변 혼잡도와 교통 상황 대시보드.",
+  description: "서울 공공데이터 기반 실시간 주변 인구 추정치와 교통 상황 대시보드.",
   icons: {
     icon: [{ url: "/seewe-icon.svg", type: "image/svg+xml" }],
     apple: [{ url: "/logo.png", sizes: "512x512", type: "image/png" }],
   },
   openGraph: {
     title: "SeeWe",
-    description: "서울 공공데이터 기반 실시간 주변 혼잡도와 교통 상황 대시보드.",
+    description: "서울 공공데이터 기반 실시간 주변 인구 추정치와 교통 상황 대시보드.",
     images: [{ url: "/logo.png", width: 512, height: 512, alt: "SeeWe" }],
   },
 };

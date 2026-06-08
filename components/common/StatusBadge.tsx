@@ -1,10 +1,7 @@
 import { clsx } from "clsx";
-import { congestionTone } from "@/lib/utils/congestion";
-import type { CongestionLevel } from "@/types/seoul";
 
 type StatusBadgeProps = {
   children: React.ReactNode;
-  level?: CongestionLevel | null;
   tone?: "neutral" | "success" | "warning" | "danger" | "info";
   className?: string;
 };
@@ -17,12 +14,12 @@ const toneClass = {
   info: "bg-sky-100 text-sky-800 ring-sky-200",
 };
 
-export function StatusBadge({ children, level, tone = "neutral", className }: StatusBadgeProps) {
+export function StatusBadge({ children, tone = "neutral", className }: StatusBadgeProps) {
   return (
     <span
       className={clsx(
         "inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold ring-1",
-        level ? congestionTone(level) : toneClass[tone],
+        toneClass[tone],
         className,
       )}
     >
