@@ -1,4 +1,5 @@
 import { formatPopulation } from "@/lib/utils/number";
+import { populationMarkerClass } from "@/lib/utils/populationMarker";
 import type { GateEstimate } from "@/types/estimate";
 
 type GateMarkerProps = {
@@ -16,7 +17,9 @@ export function GateMarker({ estimate, x, y, size, isSelected, onSelect }: GateM
       <button
         type="button"
         onClick={() => onSelect(estimate.gateId)}
-        className="flex items-center justify-center rounded-full border-2 border-white/80 bg-sky-400/80 text-[10px] font-bold text-slate-950 shadow-xl shadow-slate-950/40 backdrop-blur transition hover:scale-105"
+        className={`flex items-center justify-center rounded-full border-2 text-[10px] font-bold shadow-xl shadow-slate-950/40 backdrop-blur transition hover:scale-105 ${populationMarkerClass(
+          estimate.estimatedMid,
+        )}`}
         style={{ width: Math.max(size, 44), height: Math.max(size, 44) }}
         aria-label={`${estimate.gateName} 추정 인구`}
       >

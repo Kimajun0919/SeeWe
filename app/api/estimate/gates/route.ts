@@ -8,7 +8,6 @@ import type { SeoulCityData, SeoulPopulation } from "@/types/seoul";
 const API_CACHE_SECONDS = 5 * 60;
 
 export const runtime = "nodejs";
-export const revalidate = API_CACHE_SECONDS;
 
 type EstimateRequestBody = {
   areaNm?: string;

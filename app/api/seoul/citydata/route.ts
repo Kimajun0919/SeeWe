@@ -4,7 +4,6 @@ import { SeoulApiError } from "@/lib/seoul/fetchPopulation";
 const API_CACHE_SECONDS = 5 * 60;
 
 export const runtime = "nodejs";
-export const revalidate = API_CACHE_SECONDS;
 
 export async function GET(request: Request) {
   const areaNm = new URL(request.url).searchParams.get("areaNm")?.trim();

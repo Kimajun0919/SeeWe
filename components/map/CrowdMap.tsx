@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { formatPopulation } from "@/lib/utils/number";
+import { populationMarkerClass } from "@/lib/utils/populationMarker";
 import { useMapLayers, type MapLayerKey } from "@/lib/hooks/useMapLayers";
 import type { AreaConfig } from "@/types/area";
 import type { GateEstimate } from "@/types/estimate";
@@ -406,8 +407,8 @@ function clearNativeOverlays(overlays: KakaoCustomOverlay[]): void {
 function createGateOverlayElement(estimate: GateEstimate, size: number): HTMLElement {
   const displaySize = Math.max(size, 44);
   const element = document.createElement("div");
-  element.className = `pointer-events-none flex flex-col items-center justify-center rounded-full border-2 border-white/80 text-[10px] font-bold shadow-xl shadow-slate-950/40 backdrop-blur ${gateTypeClass(
-    estimate.gateType,
+  element.className = `pointer-events-none flex flex-col items-center justify-center rounded-full border-2 text-[10px] font-bold shadow-xl shadow-slate-950/40 backdrop-blur ${populationMarkerClass(
+    estimate.estimatedMid,
   )}`;
   element.style.width = `${displaySize}px`;
   element.style.height = `${displaySize}px`;
@@ -425,19 +426,6 @@ function createGateOverlayElement(estimate: GateEstimate, size: number): HTMLEle
 
   element.append(gateNo, population);
   return element;
-}
-
-function gateTypeClass(gateType: GateEstimate["gateType"]): string {
-  switch (gateType) {
-    case "vip_operation":
-      return "bg-amber-300/90 text-slate-950";
-    case "player":
-      return "bg-violet-300/90 text-slate-950";
-    case "staff":
-      return "bg-emerald-300/90 text-slate-950";
-    default:
-      return "bg-sky-400/90 text-slate-950";
-  }
 }
 
 function createPillOverlayElement(
