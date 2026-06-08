@@ -125,7 +125,7 @@ export function AreaSettingsClient({ initialAreaNm }: AreaSettingsClientProps) {
         />
 
         <header className="mt-5 rounded-[1.75rem] border border-white/10 bg-white/[0.06] p-4 sm:rounded-3xl sm:p-5">
-          <p className="mt-6 text-xs font-semibold uppercase tracking-[0.24em] text-sky-200 sm:tracking-[0.28em]">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sky-200 sm:tracking-[0.28em]">
             권역 설정
           </p>
           <h1 className="mt-2 break-keep text-2xl font-bold text-white sm:text-3xl">권역 좌표 관리</h1>
@@ -137,27 +137,27 @@ export function AreaSettingsClient({ initialAreaNm }: AreaSettingsClientProps) {
 
         <section className="mt-5 rounded-[1.75rem] border border-white/10 bg-white/[0.06] p-4 sm:rounded-3xl sm:p-5">
           <div className="grid gap-2 sm:grid-cols-3 lg:max-w-3xl">
-              <button
-                type="button"
-                onClick={saveDraft}
-                className="inline-flex min-h-11 items-center justify-center rounded-2xl bg-sky-300 px-4 py-2 text-sm font-semibold text-slate-950 shadow-lg shadow-sky-950/20 transition hover:bg-sky-200"
-              >
-                로컬 저장
-              </button>
-              <button
-                type="button"
-                onClick={restoreSelectedArea}
-                className="inline-flex min-h-11 items-center justify-center rounded-2xl border border-white/10 px-4 py-2 text-sm font-semibold text-sky-100 transition hover:bg-white/10"
-              >
-                권역 기본값
-              </button>
-              <button
-                type="button"
-                onClick={resetAll}
-                className="inline-flex min-h-11 items-center justify-center rounded-2xl border border-red-300/30 px-4 py-2 text-sm font-semibold text-red-100 transition hover:bg-red-500/10"
-              >
-                전체 초기화
-              </button>
+            <button
+              type="button"
+              onClick={saveDraft}
+              className="inline-flex min-h-11 items-center justify-center rounded-2xl bg-sky-300 px-4 py-2 text-sm font-semibold text-slate-950 shadow-lg shadow-sky-950/20 transition hover:bg-sky-200"
+            >
+              로컬 저장
+            </button>
+            <button
+              type="button"
+              onClick={restoreSelectedArea}
+              className="inline-flex min-h-11 items-center justify-center rounded-2xl border border-white/10 px-4 py-2 text-sm font-semibold text-sky-100 transition hover:bg-white/10"
+            >
+              권역 기본값
+            </button>
+            <button
+              type="button"
+              onClick={resetAll}
+              className="inline-flex min-h-11 items-center justify-center rounded-2xl border border-red-300/30 px-4 py-2 text-sm font-semibold text-red-100 transition hover:bg-red-500/10"
+            >
+              전체 초기화
+            </button>
           </div>
 
           {statusMessage ? (

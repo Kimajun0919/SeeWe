@@ -17,7 +17,7 @@ type DashboardMenuProps = {
 
 export function DashboardMenu({ areaNm, areaOptions, currentPage, feedbackFormUrl, onAreaChange }: DashboardMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLElement>(null);
   const encodedAreaNm = encodeURIComponent(areaNm);
   const canSelectArea = Boolean(areaOptions?.length && onAreaChange);
   const menuItems = [
