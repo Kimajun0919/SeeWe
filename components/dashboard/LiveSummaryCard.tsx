@@ -19,12 +19,11 @@ export function LiveSummaryCard({ population, lastFetchedAt, isSourceWaiting }: 
             {population?.areaName || "올림픽공원"}
           </h2>
           <p className="mt-2 max-w-3xl break-keep text-sm leading-6 text-slate-300">
-            {population?.congestionMessage || "서울시 공개 데이터를 기다리는 중입니다."}
+            서울시 공개 데이터의 인구 범위와 추정 중앙값만 표시합니다.
           </p>
         </div>
 
         <div className="flex flex-wrap gap-2">
-          {population ? <StatusBadge level={population.congestionLevel}>{population.congestionLevel}</StatusBadge> : null}
           {population?.replaceYn === "Y" ? <StatusBadge tone="warning">대체 데이터 사용 중</StatusBadge> : null}
           {isSourceWaiting ? <StatusBadge tone="info">서울 원천 데이터 갱신 대기 중</StatusBadge> : null}
         </div>

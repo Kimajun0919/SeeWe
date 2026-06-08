@@ -1,4 +1,3 @@
-import { StatusBadge } from "@/components/common/StatusBadge";
 import { formatPopulation } from "@/lib/utils/number";
 import type { GateEstimate } from "@/types/estimate";
 
@@ -33,19 +32,17 @@ export function GateMarker({ estimate, x, y, size, isSelected, onSelect }: GateM
                 추정 {formatPopulation(estimate.estimatedMin)} - {formatPopulation(estimate.estimatedMax)}
               </p>
             </div>
-            <StatusBadge tone="warning">추정</StatusBadge>
           </div>
-          <div className="mt-3 flex flex-wrap gap-2">
-            <StatusBadge level={estimate.congestionLevel}>{estimate.congestionLevel}</StatusBadge>
-            <StatusBadge tone={estimate.confidence === "낮음" ? "danger" : "info"}>
-              신뢰도 {estimate.confidence}
-            </StatusBadge>
+          <div className="mt-3 grid gap-2 rounded-2xl bg-white/[0.06] p-3 text-xs text-slate-300">
+            <div className="flex items-center justify-between gap-3">
+              <span>중앙값</span>
+              <strong className="text-sm text-white">{formatPopulation(estimate.estimatedMid)}</strong>
+            </div>
+            <div className="flex items-center justify-between gap-3">
+              <span>가중치</span>
+              <strong className="text-sm text-white">{Math.round(estimate.weight * 1000) / 10}%</strong>
+            </div>
           </div>
-          <ul className="mt-3 space-y-1 break-keep text-xs leading-5 text-slate-300">
-            {estimate.reasons.slice(0, 3).map((reason) => (
-              <li key={reason}>- {reason}</li>
-            ))}
-          </ul>
         </div>
       ) : null}
     </div>

@@ -78,7 +78,7 @@ export function DashboardDetailsClient({ initialAreaNm }: DashboardDetailsClient
         </section>
 
         <section className="grid gap-3 rounded-[1.75rem] border border-white/10 bg-slate-950/60 p-4 text-sm leading-6 text-slate-300 sm:rounded-3xl sm:p-5">
-          <p>이 서비스는 서울시 공개 데이터를 기반으로 주변 혼잡도를 참고용으로 보여주는 도구입니다.</p>
+          <p>이 서비스는 서울시 공개 데이터를 기반으로 주변 인구 추정치를 참고용으로 보여주는 도구입니다.</p>
           <p>
             출입구별 인구는 실제 측정값이 아닙니다. 전체 권역 인구, 교통, 위치 데이터를 바탕으로 계산한 추정값입니다.
           </p>

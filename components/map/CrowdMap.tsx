@@ -379,7 +379,7 @@ export function CrowdMap({ areaConfig, estimates, cityData }: CrowdMapProps) {
           : null}
 
         <div className="pointer-events-none absolute bottom-4 left-4 right-4 z-30 rounded-2xl border border-white/15 bg-slate-950/85 p-3 text-xs leading-5 text-slate-300 shadow-xl backdrop-blur sm:right-auto sm:max-w-sm">
-          이 지도는 주변 혼잡도 추정치를 참고용으로 시각화합니다. 개인 위치, 특정 단체, 참여자 규모를 식별하거나 추적하지 않습니다.
+          이 지도는 주변 인구 추정치를 참고용으로 시각화합니다. 개인 위치, 특정 단체, 참여자 규모를 식별하거나 추적하지 않습니다.
         </div>
       </div>
     </section>

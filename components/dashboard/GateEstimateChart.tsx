@@ -1,7 +1,6 @@
 "use client";
 
-import { Bar, BarChart, CartesianGrid, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { congestionMarkerColor } from "@/lib/utils/congestion";
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { formatPopulation } from "@/lib/utils/number";
 import type { GateEstimate } from "@/types/estimate";
 
@@ -37,11 +36,7 @@ export function GateEstimateChart({ estimates }: { estimates: GateEstimate[] }) 
                 }}
                 formatter={(value) => [formatPopulation(Number(value)), "추정 중앙값"]}
               />
-              <Bar dataKey="estimatedMid" radius={[10, 10, 0, 0]}>
-                {estimates.map((estimate) => (
-                  <Cell key={estimate.gateId} fill={congestionMarkerColor(estimate.congestionLevel)} />
-                ))}
-              </Bar>
+              <Bar dataKey="estimatedMid" fill="#38bdf8" radius={[10, 10, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
