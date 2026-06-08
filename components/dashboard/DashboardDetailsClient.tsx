@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { BrandLogo } from "@/components/common/BrandLogo";
 import { ErrorNotice } from "@/components/common/ErrorNotice";
 import { LoadingSkeleton } from "@/components/common/LoadingSkeleton";
 import { defaultAreaNm, getAreaConfig as getStaticAreaConfig } from "@/lib/config/areas";
@@ -33,20 +32,12 @@ export function DashboardDetailsClient({ initialAreaNm }: DashboardDetailsClient
   return (
     <main className="min-h-dvh overflow-x-hidden bg-[radial-gradient(circle_at_top,rgba(14,165,233,0.18),transparent_36%),#020617] px-3 py-4 text-slate-100 sm:px-6 sm:py-6 lg:px-8">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 sm:gap-5">
-        <header className="rounded-[1.75rem] border border-white/10 bg-white/[0.06] p-4 shadow-2xl shadow-slate-950/25 sm:rounded-3xl sm:p-5">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div className="min-w-0">
-              <BrandLogo />
-            </div>
-
-            <DashboardMenu
-              areaNm={areaConfig.areaNm}
-              areaOptions={areaConfigs}
-              currentPage="details"
-              onAreaChange={setAreaNm}
-            />
-          </div>
-        </header>
+        <DashboardMenu
+          areaNm={areaConfig.areaNm}
+          areaOptions={areaConfigs}
+          currentPage="details"
+          onAreaChange={setAreaNm}
+        />
 
         <RefreshControl
           isFetching={live.isFetching}

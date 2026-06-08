@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { BrandLogo } from "@/components/common/BrandLogo";
 import { DashboardMenu } from "@/components/dashboard/DashboardMenu";
 import { areaConfigs as defaultAreaConfigs, defaultAreaNm, getAreaConfig as getDefaultAreaConfig } from "@/lib/config/areas";
 import { useLocalAreaConfigs } from "@/lib/hooks/useLocalAreaConfigs";
@@ -118,16 +117,14 @@ export function AreaSettingsClient({ initialAreaNm }: AreaSettingsClientProps) {
   return (
     <main className="min-h-dvh overflow-x-hidden bg-slate-950 px-3 py-4 text-slate-100 sm:px-6 sm:py-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <header className="rounded-[1.75rem] border border-white/10 bg-white/[0.06] p-4 sm:rounded-3xl sm:p-5">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <BrandLogo />
-            <DashboardMenu
-              areaNm={selectedArea.areaNm}
-              areaOptions={activeConfigs}
-              currentPage="settings"
-              onAreaChange={setSelectedAreaNm}
-            />
-          </div>
+        <DashboardMenu
+          areaNm={selectedArea.areaNm}
+          areaOptions={activeConfigs}
+          currentPage="settings"
+          onAreaChange={setSelectedAreaNm}
+        />
+
+        <header className="mt-5 rounded-[1.75rem] border border-white/10 bg-white/[0.06] p-4 sm:rounded-3xl sm:p-5">
           <p className="mt-6 text-xs font-semibold uppercase tracking-[0.24em] text-sky-200 sm:tracking-[0.28em]">
             권역 설정
           </p>
@@ -139,26 +136,7 @@ export function AreaSettingsClient({ initialAreaNm }: AreaSettingsClientProps) {
         </header>
 
         <section className="mt-5 rounded-[1.75rem] border border-white/10 bg-white/[0.06] p-4 sm:rounded-3xl sm:p-5">
-          <div className="grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
-            <div>
-              <label htmlFor="settings-area-select" className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
-                권역 선택
-              </label>
-              <select
-                id="settings-area-select"
-                value={selectedArea.areaNm}
-                onChange={(event) => setSelectedAreaNm(event.target.value)}
-                className="mt-2 min-h-12 w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-sm font-semibold text-white outline-none ring-sky-300 transition focus:ring-2"
-              >
-                {activeConfigs.map((area) => (
-                  <option key={area.areaNm} value={area.areaNm}>
-                    {area.displayName}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="grid gap-2 sm:grid-cols-3 lg:min-w-[34rem]">
+          <div className="grid gap-2 sm:grid-cols-3 lg:max-w-3xl">
               <button
                 type="button"
                 onClick={saveDraft}
@@ -180,7 +158,6 @@ export function AreaSettingsClient({ initialAreaNm }: AreaSettingsClientProps) {
               >
                 전체 초기화
               </button>
-            </div>
           </div>
 
           {statusMessage ? (

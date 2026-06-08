@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { BrandLogo } from "@/components/common/BrandLogo";
 
 type DashboardMenuProps = {
   areaNm: string;
@@ -53,24 +54,39 @@ export function DashboardMenu({ areaNm, areaOptions, currentPage, feedbackFormUr
   }, [isOpen]);
 
   return (
-    <div ref={menuRef} className="relative">
-      <button
-        type="button"
-        aria-expanded={isOpen}
-        aria-label="메뉴 열기"
-        onClick={() => setIsOpen((current) => !current)}
-        className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-2 text-sm font-semibold text-sky-100 shadow-lg shadow-slate-950/20 transition hover:bg-white/10 sm:w-auto"
-      >
-        <span className="flex h-4 w-5 flex-col justify-between" aria-hidden="true">
-          <span className="h-0.5 rounded-full bg-current" />
-          <span className="h-0.5 rounded-full bg-current" />
-          <span className="h-0.5 rounded-full bg-current" />
-        </span>
-        메뉴
-      </button>
+    <nav
+      ref={menuRef}
+      aria-label="주요 메뉴"
+      className="sticky top-3 z-50 rounded-[1.75rem] border border-white/10 bg-slate-950/85 p-3 shadow-2xl shadow-slate-950/30 backdrop-blur sm:rounded-3xl"
+    >
+      <div className="flex items-center justify-between gap-3">
+        <div className="min-w-0 flex-1">
+          <BrandLogo />
+        </div>
+
+        <div className="flex min-w-0 items-center gap-2">
+          <span className="hidden max-w-40 truncate rounded-full border border-white/10 bg-white/[0.06] px-3 py-2 text-xs font-semibold text-slate-300 sm:inline">
+            {areaOptions?.find((area) => area.areaNm === areaNm)?.displayName ?? areaNm}
+          </span>
+          <button
+            type="button"
+            aria-expanded={isOpen}
+            aria-label="메뉴 열기"
+            onClick={() => setIsOpen((current) => !current)}
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/[0.06] px-4 py-2 text-sm font-semibold text-sky-100 transition hover:bg-white/10"
+          >
+            <span className="flex h-4 w-5 flex-col justify-between" aria-hidden="true">
+              <span className="h-0.5 rounded-full bg-current" />
+              <span className="h-0.5 rounded-full bg-current" />
+              <span className="h-0.5 rounded-full bg-current" />
+            </span>
+            메뉴
+          </button>
+        </div>
+      </div>
 
       {isOpen ? (
-        <div className="absolute right-0 top-12 z-50 grid w-56 gap-2 rounded-3xl border border-white/10 bg-slate-950/95 p-3 text-sm shadow-2xl shadow-slate-950/40 backdrop-blur">
+        <div className="absolute right-3 top-[4.5rem] z-50 grid w-[min(20rem,calc(100vw-2rem))] gap-2 rounded-3xl border border-white/10 bg-slate-950/95 p-3 text-sm shadow-2xl shadow-slate-950/40 backdrop-blur">
           {canSelectArea ? (
             <label className="grid gap-2 rounded-2xl bg-white/[0.06] p-3 text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">
               권역 선택
@@ -115,6 +131,6 @@ export function DashboardMenu({ areaNm, areaOptions, currentPage, feedbackFormUr
           ) : null}
         </div>
       ) : null}
-    </div>
+    </nav>
   );
 }
