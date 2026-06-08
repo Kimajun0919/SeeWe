@@ -416,8 +416,17 @@ export function CrowdMap({ areaConfig, estimates, cityData }: CrowdMapProps) {
                 <PopulationCriterion colorClass="bg-orange-400" label="주황" value="800명 이상" />
                 <PopulationCriterion colorClass="bg-red-500" label="빨강" value="1,100명 이상" />
               </div>
+              <div className="mt-4 rounded-2xl bg-white/[0.06] p-3">
+                <p className="font-semibold text-white">추정치 계산 방식</p>
+                <ol className="mt-2 list-decimal space-y-1 pl-4 break-keep">
+                  <li>서울시 권역 인구 범위의 중앙값을 기준으로 잡습니다.</li>
+                  <li>출입구 기본 가중치에 대중교통, 주차, 도로, 사고/통제 위치 신호를 더합니다.</li>
+                  <li>모든 출입구 가중치를 합계 100%로 정규화한 뒤 인구 범위에 곱합니다.</li>
+                  <li>지도 색상은 출입구별 추정 중앙값 기준으로 표시합니다.</li>
+                </ol>
+              </div>
               <p className="mt-3 break-keep">
-                이 지도는 주변 인구 추정치를 참고용으로 시각화합니다. 개인 위치, 특정 단체, 참여자 규모를
+                출입구별 값은 실제 계측값이 아닌 참고용 추정치입니다. 개인 위치, 특정 단체, 참여자 규모를
                 식별하거나 추적하지 않습니다.
               </p>
             </div>
