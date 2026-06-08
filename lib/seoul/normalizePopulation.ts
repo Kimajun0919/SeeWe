@@ -69,7 +69,7 @@ export function normalizePopulation(raw: unknown, appFetchedAt = new Date().toIS
     areaName: pickString(populationRecord, ["AREA_NM"], pickString(areaRecord, ["AREA_NM"], "")),
     areaCode: pickString(populationRecord, ["AREA_CD"], pickString(areaRecord, ["AREA_CD"], "")),
     congestionLevel: normalizeCongestionLevel(pickString(populationRecord, ["AREA_CONGEST_LVL"], "정보없음")),
-    congestionMessage: pickString(populationRecord, ["AREA_CONGEST_MSG"], "혼잡도 메시지가 없습니다."),
+    congestionMessage: pickString(populationRecord, ["AREA_CONGEST_MSG"], "No congestion message is available."),
     populationMin,
     populationMax,
     populationMid: Math.round((populationMin + populationMax) / 2),

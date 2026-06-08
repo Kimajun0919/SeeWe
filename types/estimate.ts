@@ -1,3 +1,5 @@
+import type { ConfidenceLevel, NormalizedCongestionLevel } from "./seoul";
+
 export type GateEstimate = {
   gateId: string;
   gateName: string;
@@ -7,8 +9,8 @@ export type GateEstimate = {
   estimatedMax: number;
   estimatedMid: number;
   weight: number;
-  congestionLevel: "여유" | "보통" | "약간 붐빔" | "붐빔" | "정보없음";
-  confidence: "높음" | "보통" | "낮음";
+  congestionLevel: NormalizedCongestionLevel;
+  confidence: ConfidenceLevel;
   reasons: string[];
   isEstimated: true;
 };

@@ -1,9 +1,13 @@
-export type CongestionLevel = "여유" | "보통" | "약간 붐빔" | "붐빔" | string;
+export type NormalizedCongestionLevel = "여유" | "보통" | "약간 붐빔" | "붐빔" | "정보없음";
+export type CongestionLevel = NormalizedCongestionLevel | string;
+export type TrafficFlowStatus = "원활" | "서행" | "정체" | "통제" | "정보없음";
+export type ParkingAvailabilityStatus = "여유" | "보통" | "만차" | "정보없음";
+export type ConfidenceLevel = "높음" | "보통" | "낮음";
 
 export type SeoulPopulation = {
   areaName: string;
   areaCode: string;
-  congestionLevel: CongestionLevel;
+  congestionLevel: NormalizedCongestionLevel;
   congestionMessage: string;
   populationMin: number;
   populationMax: number;
@@ -27,7 +31,7 @@ export type SeoulPopulation = {
   appFetchedAt: string;
   forecast: Array<{
     time: string;
-    congestionLevel: CongestionLevel;
+    congestionLevel: NormalizedCongestionLevel;
     populationMin: number;
     populationMax: number;
     populationMid: number;
@@ -51,7 +55,7 @@ export type TrafficStatus = {
   roadName: string;
   sectionName: string;
   speed: number | null;
-  status: "원활" | "서행" | "정체" | "통제" | "정보없음";
+  status: TrafficFlowStatus;
   message?: string;
   lat?: number;
   lng?: number;
@@ -90,7 +94,7 @@ export type ParkingStatus = {
   capacity?: number | null;
   currentCount?: number | null;
   availableCount?: number | null;
-  status: "여유" | "보통" | "혼잡" | "정보없음";
+  status: ParkingAvailabilityStatus;
   lat?: number;
   lng?: number;
 };

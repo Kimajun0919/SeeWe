@@ -118,13 +118,13 @@ export function uniqueBy<T>(items: T[], getKey: (item: T) => string): T[] {
 }
 
 export function extractResult(root: unknown): { code?: string; message?: string } {
-  const resultRecord = firstRecordWithAnyKey(root, ["CODE", "MESSAGE", "RESULT.CODE"]);
+  const resultRecord = firstRecordWithAnyKey(root, ["CODE", "MESSAGE"]);
   if (!resultRecord) {
     return {};
   }
 
   return {
-    code: pickString(resultRecord, ["CODE", "RESULT.CODE"], undefined as unknown as string),
-    message: pickString(resultRecord, ["MESSAGE", "RESULT.MESSAGE"], undefined as unknown as string),
+    code: pickString(resultRecord, ["CODE"]) || undefined,
+    message: pickString(resultRecord, ["MESSAGE"]) || undefined,
   };
 }

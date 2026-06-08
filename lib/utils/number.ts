@@ -7,7 +7,7 @@ export function toNumber(value: unknown): number | null {
     return Number.isFinite(value) ? value : null;
   }
 
-  const cleaned = String(value).replace(/[,％%명대\s]/g, "");
+  const cleaned = String(value).replace(/[,명\s]/g, "");
   if (cleaned === "" || cleaned === "-") {
     return null;
   }

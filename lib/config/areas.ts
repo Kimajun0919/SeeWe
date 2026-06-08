@@ -149,8 +149,22 @@ export const areaConfigs: AreaConfig[] = [
       { id: "west", name: "West Access", lat: 37.57201, lng: 126.97303, radiusM: 170, baseWeight: 0.25 },
     ],
     transitAnchors: [
-      { id: "gwanghwamun-station", type: "subway", name: "Gwanghwamun Station", lat: 37.571607, lng: 126.976602, influenceWeight: 0.14 },
-      { id: "cityhall-station", type: "subway", name: "City Hall Station", lat: 37.565704, lng: 126.977088, influenceWeight: 0.12 },
+      {
+        id: "gwanghwamun-station",
+        type: "subway",
+        name: "Gwanghwamun Station",
+        lat: 37.571607,
+        lng: 126.976602,
+        influenceWeight: 0.14,
+      },
+      {
+        id: "cityhall-station",
+        type: "subway",
+        name: "City Hall Station",
+        lat: 37.565704,
+        lng: 126.977088,
+        influenceWeight: 0.12,
+      },
     ],
     roadAnchors: [
       { id: "sejong-daero", name: "Sejong-daero", lat: 37.570856, lng: 126.976788, influenceWeight: 0.12 },
@@ -177,8 +191,22 @@ export const areaConfigs: AreaConfig[] = [
       { id: "deoksugung", name: "Deoksugung Access", lat: 37.565804, lng: 126.974738, radiusM: 150, baseWeight: 0.24 },
     ],
     transitAnchors: [
-      { id: "city-hall-station", type: "subway", name: "City Hall Station", lat: 37.565704, lng: 126.977088, influenceWeight: 0.16 },
-      { id: "euljiro-1ga", type: "subway", name: "Euljiro 1-ga Station", lat: 37.566017, lng: 126.982618, influenceWeight: 0.1 },
+      {
+        id: "city-hall-station",
+        type: "subway",
+        name: "City Hall Station",
+        lat: 37.565704,
+        lng: 126.977088,
+        influenceWeight: 0.16,
+      },
+      {
+        id: "euljiro-1ga",
+        type: "subway",
+        name: "Euljiro 1-ga Station",
+        lat: 37.566017,
+        lng: 126.982618,
+        influenceWeight: 0.1,
+      },
     ],
     roadAnchors: [
       { id: "sejong-daero", name: "Sejong-daero", lat: 37.565155, lng: 126.9772, influenceWeight: 0.12 },
@@ -201,12 +229,33 @@ export const areaConfigs: AreaConfig[] = [
     gates: [
       { id: "park-north", name: "Park North", lat: 37.529867, lng: 126.925163, radiusM: 190, baseWeight: 0.24 },
       { id: "park-south", name: "Park South", lat: 37.522756, lng: 126.925012, radiusM: 190, baseWeight: 0.23 },
-      { id: "station", name: "Yeouido Station Access", lat: 37.521624, lng: 126.924191, radiusM: 190, baseWeight: 0.29 },
+      {
+        id: "station",
+        name: "Yeouido Station Access",
+        lat: 37.521624,
+        lng: 126.924191,
+        radiusM: 190,
+        baseWeight: 0.29,
+      },
       { id: "han-river", name: "Han River Access", lat: 37.531713, lng: 126.933065, radiusM: 190, baseWeight: 0.24 },
     ],
     transitAnchors: [
-      { id: "yeouido-station", type: "subway", name: "Yeouido Station", lat: 37.521624, lng: 126.924191, influenceWeight: 0.16 },
-      { id: "national-assembly-station", type: "subway", name: "National Assembly Station", lat: 37.528086, lng: 126.917876, influenceWeight: 0.11 },
+      {
+        id: "yeouido-station",
+        type: "subway",
+        name: "Yeouido Station",
+        lat: 37.521624,
+        lng: 126.924191,
+        influenceWeight: 0.16,
+      },
+      {
+        id: "national-assembly-station",
+        type: "subway",
+        name: "National Assembly Station",
+        lat: 37.528086,
+        lng: 126.917876,
+        influenceWeight: 0.11,
+      },
     ],
     roadAnchors: [
       { id: "uisa-daero", name: "Uisadang-daero", lat: 37.526764, lng: 126.918808, influenceWeight: 0.1 },
@@ -230,12 +279,33 @@ export const areaConfigs: AreaConfig[] = [
     gates: [
       { id: "north", name: "North Gate", lat: 37.518912, lng: 127.073157, radiusM: 180, baseWeight: 0.24 },
       { id: "south", name: "South Gate", lat: 37.511822, lng: 127.073648, radiusM: 180, baseWeight: 0.2 },
-      { id: "sports-complex-station", name: "Sports Complex Station Access", lat: 37.511134, lng: 127.073998, radiusM: 190, baseWeight: 0.34 },
+      {
+        id: "sports-complex-station",
+        name: "Sports Complex Station Access",
+        lat: 37.511134,
+        lng: 127.073998,
+        radiusM: 190,
+        baseWeight: 0.34,
+      },
       { id: "east", name: "East Gate", lat: 37.515672, lng: 127.078674, radiusM: 180, baseWeight: 0.22 },
     ],
     transitAnchors: [
-      { id: "sports-complex-station", type: "subway", name: "Sports Complex Station", lat: 37.511134, lng: 127.073998, influenceWeight: 0.18 },
-      { id: "samseong-station", type: "subway", name: "Samseong Station", lat: 37.508844, lng: 127.06316, influenceWeight: 0.08 },
+      {
+        id: "sports-complex-station",
+        type: "subway",
+        name: "Sports Complex Station",
+        lat: 37.511134,
+        lng: 127.073998,
+        influenceWeight: 0.18,
+      },
+      {
+        id: "samseong-station",
+        type: "subway",
+        name: "Samseong Station",
+        lat: 37.508844,
+        lng: 127.06316,
+        influenceWeight: 0.08,
+      },
     ],
     roadAnchors: [
       { id: "olympic-ro", name: "Olympic-ro", lat: 37.512871, lng: 127.075337, influenceWeight: 0.12 },
@@ -263,8 +333,22 @@ export const areaConfigs: AreaConfig[] = [
       { id: "south", name: "South Transfer Area", lat: 37.552128, lng: 126.970441, radiusM: 160, baseWeight: 0.19 },
     ],
     transitAnchors: [
-      { id: "seoul-station-subway", type: "subway", name: "Seoul Station", lat: 37.554678, lng: 126.970606, influenceWeight: 0.18 },
-      { id: "seoul-station-bus-transfer", type: "bus", name: "Seoul Station bus transfer center", lat: 37.555188, lng: 126.972429, influenceWeight: 0.12 },
+      {
+        id: "seoul-station-subway",
+        type: "subway",
+        name: "Seoul Station",
+        lat: 37.554678,
+        lng: 126.970606,
+        influenceWeight: 0.18,
+      },
+      {
+        id: "seoul-station-bus-transfer",
+        type: "bus",
+        name: "Seoul Station bus transfer center",
+        lat: 37.555188,
+        lng: 126.972429,
+        influenceWeight: 0.12,
+      },
     ],
     roadAnchors: [
       { id: "hangang-daero", name: "Hangang-daero", lat: 37.552967, lng: 126.971021, influenceWeight: 0.1 },

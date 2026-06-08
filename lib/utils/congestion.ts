@@ -1,6 +1,6 @@
-import type { CongestionLevel } from "@/types/seoul";
+import type { CongestionLevel, NormalizedCongestionLevel } from "@/types/seoul";
 
-const congestionRank: Record<string, number> = {
+const congestionRank: Record<NormalizedCongestionLevel, number> = {
   정보없음: 0,
   여유: 1,
   보통: 2,
@@ -10,24 +10,32 @@ const congestionRank: Record<string, number> = {
 
 export function normalizeCongestionLevel(
   value: CongestionLevel | null | undefined,
-): "여유" | "보통" | "약간 붐빔" | "붐빔" | "정보없음" {
+): NormalizedCongestionLevel {
   if (!value) {
     return "정보없음";
   }
 
-  if (value.includes("약간")) {
+  const normalized = String(value).trim();
+  const lower = normalized.toLowerCase();
+
+  if (normalized.includes("약간") || lower.includes("slightly")) {
     return "약간 붐빔";
   }
 
-  if (value.includes("붐빔") || value.includes("혼잡") || value.includes("매우")) {
+  if (
+    normalized.includes("붐빔") ||
+    normalized.includes("혼잡") ||
+    normalized.includes("매우") ||
+    lower.includes("crowded")
+  ) {
     return "붐빔";
   }
 
-  if (value.includes("보통")) {
+  if (normalized.includes("보통") || lower.includes("normal")) {
     return "보통";
   }
 
-  if (value.includes("여유") || value.includes("한산")) {
+  if (normalized.includes("여유") || normalized.includes("원활") || lower.includes("smooth")) {
     return "여유";
   }
 
@@ -36,7 +44,7 @@ export function normalizeCongestionLevel(
 
 export function maxCongestionLevel(
   levels: Array<CongestionLevel | null | undefined>,
-): "여유" | "보통" | "약간 붐빔" | "붐빔" | "정보없음" {
+): NormalizedCongestionLevel {
   return levels
     .map(normalizeCongestionLevel)
     .sort((a, b) => congestionRank[b] - congestionRank[a])[0];
