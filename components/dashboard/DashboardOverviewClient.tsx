@@ -30,16 +30,6 @@ export function DashboardOverviewClient({ initialAreaNm }: DashboardOverviewClie
         <header className="flex flex-col gap-5 rounded-[1.75rem] border border-white/10 bg-white/[0.06] p-4 shadow-2xl shadow-slate-950/25 sm:rounded-3xl sm:p-5 lg:flex-row lg:items-center lg:justify-between">
           <div className="min-w-0 flex-1">
             <BrandLogo />
-            <p className="mt-5 text-xs font-semibold uppercase tracking-[0.24em] text-sky-200 sm:tracking-[0.28em]">
-              Live crowd signal
-            </p>
-            <h1 className="mt-2 break-keep text-2xl font-bold leading-tight tracking-tight text-white sm:text-4xl">
-              실시간 주변 혼잡도와 교통 상황 대시보드
-            </h1>
-            <p className="mt-3 max-w-3xl break-keep text-sm leading-6 text-slate-300">
-              MVP 대상지는 올림픽공원 핸드볼경기장 주변입니다. SeeWe는 서울시 공개 데이터를 10초마다 확인하고
-              주변 추정 인구와 출입구별 추정 분포를 참고용으로 보여줍니다.
-            </p>
           </div>
 
           <div className="flex w-full flex-col gap-2 lg:w-80">

@@ -33,15 +33,6 @@ export function DashboardDetailsClient({ initialAreaNm }: DashboardDetailsClient
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="min-w-0">
               <BrandLogo />
-              <p className="mt-5 text-xs font-semibold uppercase tracking-[0.24em] text-sky-200 sm:tracking-[0.28em]">
-                Detail view
-              </p>
-              <h1 className="mt-2 break-keep text-2xl font-bold leading-tight tracking-tight text-white sm:text-4xl">
-                자세히 보기
-              </h1>
-              <p className="mt-3 max-w-3xl break-keep text-sm leading-6 text-slate-300">
-                출입구별 추정 인구, 12시간 예측, 도로 교통, 대중교통, 주차 상태를 한 화면에서 확인합니다.
-              </p>
             </div>
 
             <div className="flex w-full flex-col gap-2 lg:w-80">
