@@ -34,6 +34,7 @@ export function TrafficStatusCard({ traffic, incidents }: TrafficStatusCardProps
               <p className="mt-2 text-sm text-slate-300">
                 Average speed: {item.speed === null ? "정보없음" : `${item.speed} km/h`}
               </p>
+              {item.message ? <p className="mt-1 text-xs text-slate-400">{item.message}</p> : null}
             </div>
           ))
         ) : (
@@ -44,7 +45,9 @@ export function TrafficStatusCard({ traffic, incidents }: TrafficStatusCardProps
       {incidents.length > 0 ? (
         <div className="mt-4 rounded-2xl border border-red-400/20 bg-red-950/30 p-3 text-sm text-red-100">
           <p className="font-semibold">Incident/control status</p>
-          <p className="mt-1">{incidents[0].location}: {incidents[0].message}</p>
+          <p className="mt-1">
+            {incidents[0].location}: {incidents[0].message}
+          </p>
         </div>
       ) : null}
     </section>

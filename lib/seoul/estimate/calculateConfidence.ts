@@ -1,7 +1,7 @@
 import { minutesSince } from "@/lib/utils/date";
-import type { SeoulCityData, SeoulPopulation } from "@/types/seoul";
+import type { ConfidenceLevel, SeoulCityData, SeoulPopulation } from "@/types/seoul";
 
-export function calculateConfidence(population: SeoulPopulation, cityData: SeoulCityData): "높음" | "보통" | "낮음" {
+export function calculateConfidence(population: SeoulPopulation, cityData: SeoulCityData): ConfidenceLevel {
   const sourceAgeMinutes = minutesSince(population.sourceUpdatedAt);
   const sourceIsFresh = sourceAgeMinutes !== null && sourceAgeMinutes <= 10;
   const hasReplacementData = population.replaceYn === "Y";

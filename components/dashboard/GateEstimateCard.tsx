@@ -28,7 +28,7 @@ export function GateEstimateCard({ estimate }: GateEstimateCardProps) {
 
       <ul className="mt-4 space-y-2 text-xs leading-5 text-slate-300">
         {estimate.reasons.slice(0, 3).map((reason) => (
-          <li key={reason}>• {reason}</li>
+          <li key={reason}>- {reason}</li>
         ))}
       </ul>
     </article>

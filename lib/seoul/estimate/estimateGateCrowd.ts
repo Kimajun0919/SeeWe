@@ -1,7 +1,7 @@
-import { normalizeCongestionLevel, maxCongestionLevel } from "@/lib/utils/congestion";
+import { maxCongestionLevel, normalizeCongestionLevel } from "@/lib/utils/congestion";
 import type { AreaConfig, GateConfig } from "@/types/area";
 import type { GateEstimate } from "@/types/estimate";
-import type { SeoulCityData, SeoulPopulation, TrafficStatus } from "@/types/seoul";
+import type { NormalizedCongestionLevel, SeoulCityData, SeoulPopulation, TrafficStatus } from "@/types/seoul";
 import { calculateConfidence } from "./calculateConfidence";
 import { calculateDistanceMeters } from "./calculateDistance";
 import { normalizeWeights } from "./normalizeWeights";
@@ -90,7 +90,7 @@ function applySignals(weightedGate: WeightedGate, cityData: SeoulCityData, areaC
     }
 
     const matchingParking = cityData.parkingLots.find((parking) => namesOverlap(parking.parkingName, anchor.name));
-    const parkingMultiplier = matchingParking?.status === "혼잡" ? 1.35 : matchingParking ? 1.15 : 1;
+    const parkingMultiplier = matchingParking?.status === "만차" ? 1.35 : matchingParking ? 1.15 : 1;
     weight += anchor.influenceWeight * closeness * parkingMultiplier;
     reasons.push(
       matchingParking
@@ -137,7 +137,7 @@ function applySignals(weightedGate: WeightedGate, cityData: SeoulCityData, areaC
   };
 }
 
-function densityToCongestion(density: number): "여유" | "보통" | "약간 붐빔" | "붐빔" | "정보없음" {
+function densityToCongestion(density: number): NormalizedCongestionLevel {
   if (!Number.isFinite(density)) {
     return "정보없음";
   }
@@ -180,7 +180,7 @@ function namesOverlap(left: string, right: string): boolean {
   const normalize = (value: string) =>
     value
       .toLowerCase()
-      .replace(/\s|역|정류장|공영|주차장|parking|station|stop|lot|nearby|access|-/g, "");
+      .replace(/\s|공영|정류장|주차장|역|parking|station|stop|lot|nearby|access|-/g, "");
 
   const normalizedLeft = normalize(left);
   const normalizedRight = normalize(right);

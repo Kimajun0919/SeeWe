@@ -1,11 +1,12 @@
-import { toNumber } from "@/lib/utils/number";
 import type {
   BusStopStatus,
   EventStatus,
   IncidentStatus,
+  ParkingAvailabilityStatus,
   ParkingStatus,
   SeoulCityData,
   SubwayStatus,
+  TrafficFlowStatus,
   TrafficStatus,
   WeatherStatus,
 } from "@/types/seoul";
@@ -35,7 +36,8 @@ export function normalizeCityData(raw: unknown, appFetchedAt = new Date().toISOS
     events: normalizeEvents(extractSectionRecords(raw, "EVENT_STTS")),
     sourceUpdatedAt:
       pickString(
-        records.find((record) => hasAnyKey(record, ["PPLTN_TIME", "ROAD_TRAFFIC_TIME", "WEATHER_TIME"])) ?? areaRecord,
+        records.find((record) => hasAnyKey(record, ["PPLTN_TIME", "ROAD_TRAFFIC_TIME", "WEATHER_TIME"])) ??
+          areaRecord,
         ["PPLTN_TIME", "ROAD_TRAFFIC_TIME", "WEATHER_TIME", "LIVE_DATA_STTS_DT"],
         "",
       ) || null,
@@ -99,12 +101,12 @@ function normalizeIncidents(records: Record<string, unknown>[]): IncidentStatus[
       message: pickString(
         record,
         ["ACDNT_CNTRL_MSG", "ACDNT_CNTRL_DTL", "INCIDENT_MSG", "MESSAGE", "DETAIL"],
-        "세부 메시지가 없습니다.",
+        "No incident detail message is available.",
       ),
       lat: pickNumber(record, ["LAT", "Y", "MAP_LAT"]) ?? undefined,
       lng: pickNumber(record, ["LNG", "X", "MAP_LNG", "LON"]) ?? undefined,
     }))
-    .filter((item) => item.location !== "위치 정보 없음" || item.message !== "세부 메시지가 없습니다.");
+    .filter((item) => item.location !== "위치 정보 없음" || item.message !== "No incident detail message is available.");
 
   return uniqueBy(incidents, (item) => `${item.type}-${item.location}-${item.startedAt ?? ""}`).slice(0, 10);
 }
@@ -191,10 +193,7 @@ function normalizeEvents(records: Record<string, unknown>[]): EventStatus[] {
   return uniqueBy(events, (item) => `${item.title}-${item.place ?? ""}`).slice(0, 8);
 }
 
-function trafficStatus(
-  rawStatus: string,
-  speed: number | null,
-): "원활" | "서행" | "정체" | "통제" | "정보없음" {
+function trafficStatus(rawStatus: string, speed: number | null): TrafficFlowStatus {
   if (rawStatus.includes("통제")) {
     return "통제";
   }
@@ -224,10 +223,7 @@ function trafficStatus(
   return "정보없음";
 }
 
-function parkingStatus(
-  capacity: number | null,
-  availableCount: number | null,
-): "여유" | "보통" | "혼잡" | "정보없음" {
+function parkingStatus(capacity: number | null, availableCount: number | null): ParkingAvailabilityStatus {
   if (capacity === null || availableCount === null || capacity <= 0) {
     return "정보없음";
   }
@@ -240,7 +236,7 @@ function parkingStatus(
     return "보통";
   }
 
-  return "혼잡";
+  return "만차";
 }
 
 function joinSection(record: Record<string, unknown>): string {

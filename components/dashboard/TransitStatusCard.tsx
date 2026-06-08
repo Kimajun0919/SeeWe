@@ -19,7 +19,7 @@ export function TransitStatusCard({ subways, buses, parkingLots }: TransitStatus
               <TransitLine
                 key={`${subway.stationName}-${subway.lineName ?? ""}`}
                 title={subway.stationName}
-                detail={`${subway.lineName || "Line info unavailable"} · Ride ${flowValue(subway.rideCount)} / Alight ${flowValue(subway.alightCount)}`}
+                detail={`${subway.lineName || "Line info unavailable"} - Ride ${flowValue(subway.rideCount)} / Alight ${flowValue(subway.alightCount)}`}
               />
             ))
           ) : (
@@ -51,7 +51,7 @@ export function TransitStatusCard({ subways, buses, parkingLots }: TransitStatus
                     Available {parking.availableCount ?? "정보없음"} / Capacity {parking.capacity ?? "정보없음"}
                   </p>
                 </div>
-                <StatusBadge tone={parking.status === "혼잡" ? "danger" : parking.status === "보통" ? "warning" : "success"}>
+                <StatusBadge tone={parking.status === "만차" ? "danger" : parking.status === "보통" ? "warning" : "success"}>
                   {parking.status}
                 </StatusBadge>
               </div>
