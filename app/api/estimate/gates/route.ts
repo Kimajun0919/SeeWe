@@ -32,11 +32,12 @@ export async function POST(request: Request) {
     body = {};
   }
 
-  if (!body.areaNm) {
+  const areaNm = body.areaNm?.trim();
+  if (!areaNm) {
     return jsonError("areaNm is required.", 400);
   }
 
-  return estimateForArea(body);
+  return estimateForArea({ ...body, areaNm });
 }
 
 async function estimateForArea(input: EstimateRequestBody & { areaNm: string }) {
