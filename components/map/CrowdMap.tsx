@@ -56,12 +56,29 @@ const layerLabels: Record<MapLayerKey, string> = {
 
 export function CrowdMap({ areaConfig, estimates, cityData }: CrowdMapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
+  const layerMenuRef = useRef<HTMLDivElement>(null);
   const kakaoMapRef = useRef<KakaoMapInstance | null>(null);
   const nativeOverlaysRef = useRef<KakaoCustomOverlay[]>([]);
   const [selectedGateId, setSelectedGateId] = useState<string | null>(null);
+  const [isLayerMenuOpen, setIsLayerMenuOpen] = useState(false);
   const [sdkStatus, setSdkStatus] = useState<"missing-key" | "loading" | "ready" | "failed">("missing-key");
   const { layers, toggleLayer } = useMapLayers();
   const kakaoMapKey = process.env.NEXT_PUBLIC_KAKAO_MAP_KEY;
+
+  useEffect(() => {
+    if (!isLayerMenuOpen) {
+      return;
+    }
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!layerMenuRef.current?.contains(event.target as Node)) {
+        setIsLayerMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("pointerdown", handlePointerDown);
+    return () => window.removeEventListener("pointerdown", handlePointerDown);
+  }, [isLayerMenuOpen]);
 
   const displayEstimates = useMemo(
     () =>
@@ -276,21 +293,34 @@ export function CrowdMap({ areaConfig, estimates, cityData }: CrowdMapProps) {
               : "카카오 지도 키가 없어서 간이 지도를 표시합니다. NEXT_PUBLIC_KAKAO_MAP_KEY를 설정하면 카카오 지도가 활성화됩니다."}
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
-          {(Object.keys(layerLabels) as MapLayerKey[]).map((layer) => (
-            <button
-              key={layer}
-              type="button"
-              onClick={() => toggleLayer(layer)}
-              className={`min-h-9 rounded-full px-3 py-2 text-xs font-semibold ring-1 transition ${
-                layers[layer]
-                  ? "bg-sky-300 text-slate-950 ring-sky-200"
-                  : "bg-slate-900 text-slate-400 ring-white/10"
-              }`}
-            >
-              {layerLabels[layer]}
-            </button>
-          ))}
+        <div ref={layerMenuRef} className="relative">
+          <button
+            type="button"
+            aria-expanded={isLayerMenuOpen}
+            onClick={() => setIsLayerMenuOpen((current) => !current)}
+            className="inline-flex min-h-10 w-full items-center justify-center rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-2 text-xs font-semibold text-sky-100 transition hover:bg-white/10 sm:w-auto"
+          >
+            표시 항목
+          </button>
+
+          {isLayerMenuOpen ? (
+            <div className="absolute right-0 top-12 z-40 grid w-48 gap-1 rounded-3xl border border-white/10 bg-slate-950/95 p-3 text-sm shadow-2xl shadow-slate-950/40 backdrop-blur">
+              {(Object.keys(layerLabels) as MapLayerKey[]).map((layer) => (
+                <label
+                  key={layer}
+                  className="flex min-h-10 cursor-pointer items-center gap-3 rounded-2xl px-3 py-2 text-slate-200 transition hover:bg-white/10"
+                >
+                  <input
+                    type="checkbox"
+                    checked={layers[layer]}
+                    onChange={() => toggleLayer(layer)}
+                    className="h-4 w-4 rounded border-white/20 bg-slate-950 accent-sky-300"
+                  />
+                  <span className="text-sm font-semibold">{layerLabels[layer]}</span>
+                </label>
+              ))}
+            </div>
+          ) : null}
         </div>
       </div>
 

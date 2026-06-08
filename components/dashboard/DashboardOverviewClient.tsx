@@ -38,6 +38,8 @@ export function DashboardOverviewClient({ initialAreaNm }: DashboardOverviewClie
           onAreaChange={setAreaNm}
         />
 
+        <CrowdMap areaConfig={areaConfig} estimates={live.gateEstimates} cityData={cityData} />
+
         {live.isError ? <ErrorNotice message={live.errorMessage} /> : null}
 
         {live.population ? (
@@ -49,8 +51,6 @@ export function DashboardOverviewClient({ initialAreaNm }: DashboardOverviewClie
         ) : (
           <LoadingSkeleton className="h-56" />
         )}
-
-        <CrowdMap areaConfig={areaConfig} estimates={live.gateEstimates} cityData={cityData} />
       </div>
     </main>
   );
