@@ -15,6 +15,8 @@ import { CrowdMap } from "@/components/map/CrowdMap";
 import { areaConfigs, defaultAreaNm, getAreaConfig, getDefaultAreaConfig } from "@/lib/config/areas";
 import { useLiveAreaData } from "@/lib/hooks/useLiveAreaData";
 
+const feedbackFormUrl = process.env.NEXT_PUBLIC_FEEDBACK_FORM_URL || "https://forms.gle/yhT166DZaKZsrxi37";
+
 export default function DashboardPage() {
   const [areaNm, setAreaNm] = useState(defaultAreaNm);
   const areaConfig = useMemo(() => getAreaConfig(areaNm) ?? getDefaultAreaConfig(), [areaNm]);
@@ -26,7 +28,7 @@ export default function DashboardPage() {
       <div className="mx-auto flex max-w-7xl flex-col gap-5">
         <header className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/[0.06] p-5 shadow-2xl shadow-slate-950/25 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-sky-200">CrowdScope Seoul</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-sky-200">SeeWe</p>
             <h1 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
               Real-time crowd density and traffic dashboard
             </h1>
@@ -55,6 +57,14 @@ export default function DashboardPage() {
             <Link href="/settings/areas" className="text-xs font-medium text-sky-200 hover:text-sky-100">
               Manage area configuration
             </Link>
+            <a
+              href={feedbackFormUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-2 inline-flex items-center justify-center rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-slate-950 shadow-lg shadow-slate-950/20 transition hover:bg-sky-100"
+            >
+              같이 개선하기
+            </a>
           </div>
         </header>
 

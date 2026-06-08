@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CrowdScope Seoul",
+  title: "SeeWe",
   description: "Real-time Seoul public data crowd density and traffic dashboard.",
 };
 

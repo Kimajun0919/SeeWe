@@ -1,6 +1,6 @@
-# CrowdScope Seoul
+# SeeWe
 
-CrowdScope Seoul is a Next.js App Router MVP for a map-based, real-time crowd density and traffic dashboard using Seoul public data APIs. The initial target is Olympic Park, with a focus on the Olympic Park Handball Gymnasium area.
+SeeWe is a Next.js App Router MVP for a map-based, real-time crowd density and traffic dashboard using Seoul public data APIs. The initial target is Olympic Park, with a focus on the Olympic Park Handball Gymnasium area.
 
 The dashboard shows estimated surrounding population, estimated distribution by entrance, traffic, incident/control, subway, bus, parking, and forecast information. Entrance-level values are always estimates, not measured counts.
 
@@ -20,6 +20,7 @@ Create `.env` in the project root:
 ```bash
 SEOUL_OPEN_API_KEY=your_seoul_open_api_key
 NEXT_PUBLIC_KAKAO_MAP_KEY=your_kakao_javascript_map_key
+NEXT_PUBLIC_FEEDBACK_FORM_URL=https://forms.gle/yhT166DZaKZsrxi37
 ```
 
 `SEOUL_OPEN_API_KEY` is used only by server Route Handlers and is never exposed to the browser. `NEXT_PUBLIC_KAKAO_MAP_KEY` is optional for local development; without it, the dashboard renders a schematic fallback map.
