@@ -58,10 +58,12 @@ const layerLabels: Record<MapLayerKey, string> = {
 export function CrowdMap({ areaConfig, estimates, cityData }: CrowdMapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
   const layerMenuRef = useRef<HTMLDivElement>(null);
+  const infoPanelRef = useRef<HTMLDivElement>(null);
   const kakaoMapRef = useRef<KakaoMapInstance | null>(null);
   const nativeOverlaysRef = useRef<KakaoCustomOverlay[]>([]);
   const [selectedGateId, setSelectedGateId] = useState<string | null>(null);
   const [isLayerMenuOpen, setIsLayerMenuOpen] = useState(false);
+  const [isInfoPanelOpen, setIsInfoPanelOpen] = useState(false);
   const [sdkStatus, setSdkStatus] = useState<"missing-key" | "loading" | "ready" | "failed">("missing-key");
   const { layers, toggleLayer } = useMapLayers();
   const kakaoMapKey = process.env.NEXT_PUBLIC_KAKAO_MAP_KEY;
@@ -80,6 +82,21 @@ export function CrowdMap({ areaConfig, estimates, cityData }: CrowdMapProps) {
     window.addEventListener("pointerdown", handlePointerDown);
     return () => window.removeEventListener("pointerdown", handlePointerDown);
   }, [isLayerMenuOpen]);
+
+  useEffect(() => {
+    if (!isInfoPanelOpen) {
+      return;
+    }
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!infoPanelRef.current?.contains(event.target as Node)) {
+        setIsInfoPanelOpen(false);
+      }
+    };
+
+    window.addEventListener("pointerdown", handlePointerDown);
+    return () => window.removeEventListener("pointerdown", handlePointerDown);
+  }, [isInfoPanelOpen]);
 
   const displayEstimates = useMemo(
     () =>
@@ -379,11 +396,47 @@ export function CrowdMap({ areaConfig, estimates, cityData }: CrowdMapProps) {
             })
           : null}
 
-        <div className="pointer-events-none absolute bottom-4 left-4 right-4 z-30 rounded-2xl border border-white/15 bg-slate-950/85 p-3 text-xs leading-5 text-slate-300 shadow-xl backdrop-blur sm:right-auto sm:max-w-sm">
-          이 지도는 주변 인구 추정치를 참고용으로 시각화합니다. 개인 위치, 특정 단체, 참여자 규모를 식별하거나 추적하지 않습니다.
+        <div ref={infoPanelRef} className="absolute bottom-4 left-4 z-30">
+          <button
+            type="button"
+            aria-expanded={isInfoPanelOpen}
+            aria-label="인구 추정치 기준 보기"
+            onClick={() => setIsInfoPanelOpen((current) => !current)}
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-slate-950/90 text-base font-bold text-sky-100 shadow-xl backdrop-blur transition hover:bg-white/10"
+          >
+            ?
+          </button>
+
+          {isInfoPanelOpen ? (
+            <div className="absolute bottom-14 left-0 w-[min(22rem,calc(100vw-2rem))] rounded-3xl border border-white/15 bg-slate-950/95 p-4 text-xs leading-5 text-slate-300 shadow-2xl shadow-slate-950/40 backdrop-blur">
+              <p className="font-semibold text-white">인구 추정치 기준</p>
+              <div className="mt-3 grid gap-2">
+                <PopulationCriterion colorClass="bg-emerald-400" label="초록" value="500명 미만" />
+                <PopulationCriterion colorClass="bg-yellow-300" label="노랑" value="500명 이상" />
+                <PopulationCriterion colorClass="bg-orange-400" label="주황" value="800명 이상" />
+                <PopulationCriterion colorClass="bg-red-500" label="빨강" value="1,100명 이상" />
+              </div>
+              <p className="mt-3 break-keep">
+                이 지도는 주변 인구 추정치를 참고용으로 시각화합니다. 개인 위치, 특정 단체, 참여자 규모를
+                식별하거나 추적하지 않습니다.
+              </p>
+            </div>
+          ) : null}
         </div>
       </div>
     </section>
+  );
+}
+
+function PopulationCriterion({ colorClass, label, value }: { colorClass: string; label: string; value: string }) {
+  return (
+    <div className="flex items-center justify-between gap-3 rounded-2xl bg-white/[0.06] px-3 py-2">
+      <span className="flex items-center gap-2 text-slate-200">
+        <span className={`h-3 w-3 rounded-full ${colorClass}`} />
+        {label}
+      </span>
+      <strong className="font-semibold text-white">{value}</strong>
+    </div>
   );
 }
 
