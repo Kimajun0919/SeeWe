@@ -197,23 +197,23 @@ export function CrowdMap({ areaConfig, estimates, cityData }: CrowdMapProps) {
   const mainSpotPoint = project(areaConfig.mainSpot);
 
   return (
-    <section className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.06] shadow-2xl shadow-slate-950/25">
+    <section className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.06] shadow-2xl shadow-slate-950/25 sm:rounded-3xl">
       <div className="flex flex-col gap-3 border-b border-white/10 p-4 lg:flex-row lg:items-center lg:justify-between">
-        <div>
+        <div className="min-w-0">
           <h3 className="font-semibold text-white">실시간 현장 지도</h3>
-          <p className="mt-1 text-xs text-slate-400">
+          <p className="mt-1 break-keep text-xs leading-5 text-slate-400">
             {sdkStatus === "ready"
               ? "카카오 지도에 출입구별 추정 인구 마커를 표시합니다."
               : "카카오 지도 키가 없어서 간이 지도를 표시합니다. NEXT_PUBLIC_KAKAO_MAP_KEY를 설정하면 카카오 지도가 활성화됩니다."}
           </p>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
           {(Object.keys(layerLabels) as MapLayerKey[]).map((layer) => (
             <button
               key={layer}
               type="button"
               onClick={() => toggleLayer(layer)}
-              className={`rounded-full px-3 py-1 text-xs font-semibold ring-1 transition ${
+              className={`min-h-9 rounded-full px-3 py-2 text-xs font-semibold ring-1 transition ${
                 layers[layer]
                   ? "bg-sky-300 text-slate-950 ring-sky-200"
                   : "bg-slate-900 text-slate-400 ring-white/10"
@@ -225,13 +225,13 @@ export function CrowdMap({ areaConfig, estimates, cityData }: CrowdMapProps) {
         </div>
       </div>
 
-      <div className="relative h-[520px] bg-slate-900">
+      <div className="relative h-[430px] bg-slate-900 sm:h-[520px]">
         <div ref={mapRef} className="absolute inset-0" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.18),rgba(15,23,42,0.2)_38%,rgba(2,6,23,0.86)_72%)]" />
-        <div className="absolute inset-4 rounded-[2rem] border border-white/10" />
+        <div className="absolute inset-3 rounded-[1.5rem] border border-white/10 sm:inset-4 sm:rounded-[2rem]" />
 
         <div
-          className="absolute z-30 -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-sky-200/60 bg-sky-300 px-3 py-2 text-xs font-bold text-slate-950 shadow-xl"
+          className="absolute z-30 max-w-36 -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-sky-200/60 bg-sky-300 px-3 py-2 text-center text-xs font-bold text-slate-950 shadow-xl"
           style={{ left: `${mainSpotPoint.x}%`, top: `${mainSpotPoint.y}%` }}
         >
           {areaConfig.mainSpot.name}
@@ -267,7 +267,7 @@ export function CrowdMap({ areaConfig, estimates, cityData }: CrowdMapProps) {
               return (
                 <div
                   key={anchor.id}
-                  className="absolute z-10 -translate-x-1/2 -translate-y-1/2 rounded-full border border-amber-200/40 bg-amber-950/80 px-2 py-1 text-[11px] font-medium text-amber-100 shadow-lg"
+                  className="absolute z-10 max-w-32 -translate-x-1/2 -translate-y-1/2 truncate rounded-full border border-amber-200/40 bg-amber-950/80 px-2 py-1 text-[11px] font-medium text-amber-100 shadow-lg sm:max-w-none"
                   style={{ left: `${point.x}%`, top: `${point.y}%` }}
                 >
                   주차: {anchor.name}
@@ -277,7 +277,7 @@ export function CrowdMap({ areaConfig, estimates, cityData }: CrowdMapProps) {
           : null}
 
         <MapLegend estimates={displayEstimates} />
-        <div className="absolute bottom-4 left-4 z-30 max-w-sm rounded-2xl border border-white/15 bg-slate-950/85 p-3 text-xs text-slate-300 shadow-xl backdrop-blur">
+        <div className="absolute bottom-4 left-4 right-4 z-30 rounded-2xl border border-white/15 bg-slate-950/85 p-3 text-xs leading-5 text-slate-300 shadow-xl backdrop-blur sm:right-auto sm:max-w-sm">
           이 지도는 주변 혼잡도 추정치를 참고용으로 시각화합니다. 개인 위치, 특정 단체, 참여자 규모를 식별하거나 추적하지 않습니다.
         </div>
       </div>

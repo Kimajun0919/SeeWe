@@ -9,7 +9,7 @@ type TransitStatusCardProps = {
 
 export function TransitStatusCard({ subways, buses, parkingLots }: TransitStatusCardProps) {
   return (
-    <section className="rounded-3xl border border-white/10 bg-white/[0.06] p-4">
+    <section className="rounded-[1.75rem] border border-white/10 bg-white/[0.06] p-4 sm:rounded-3xl">
       <h3 className="font-semibold text-white">대중교통 및 주차</h3>
 
       <div className="mt-4 grid gap-3">
@@ -44,9 +44,12 @@ export function TransitStatusCard({ subways, buses, parkingLots }: TransitStatus
         <TransitGroup title="주차장 상태">
           {parkingLots.length > 0 ? (
             parkingLots.slice(0, 4).map((parking) => (
-              <div key={parking.parkingName} className="flex items-center justify-between rounded-2xl bg-slate-950/40 p-3">
-                <div>
-                  <p className="text-sm font-medium text-white">{parking.parkingName}</p>
+              <div
+                key={parking.parkingName}
+                className="flex flex-col gap-2 rounded-2xl bg-slate-950/40 p-3 sm:flex-row sm:items-center sm:justify-between"
+              >
+                <div className="min-w-0">
+                  <p className="break-keep text-sm font-medium text-white">{parking.parkingName}</p>
                   <p className="text-xs text-slate-400">
                     가능 {parking.availableCount ?? "정보없음"} / 전체 {parking.capacity ?? "정보없음"}
                   </p>
@@ -77,8 +80,8 @@ function TransitGroup({ title, children }: { title: string; children: React.Reac
 function TransitLine({ title, detail }: { title: string; detail: string }) {
   return (
     <div className="rounded-2xl bg-slate-950/40 p-3">
-      <p className="text-sm font-medium text-white">{title}</p>
-      <p className="text-xs text-slate-400">{detail}</p>
+      <p className="break-keep text-sm font-medium text-white">{title}</p>
+      <p className="break-keep text-xs leading-5 text-slate-400">{detail}</p>
     </div>
   );
 }

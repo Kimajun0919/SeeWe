@@ -1,0 +1,31 @@
+<svg width="220" height="64" viewBox="0 0 220 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">SeeWe</title>
+  <desc id="desc">SeeWe crowd signal wordmark</desc>
+  <defs>
+    <linearGradient id="pin" x1="11" y1="6" x2="48" y2="55" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38BDF8"/>
+      <stop offset="0.55" stop-color="#0EA5E9"/>
+      <stop offset="1" stop-color="#1D4ED8"/>
+    </linearGradient>
+    <linearGradient id="text" x1="68" y1="14" x2="213" y2="49" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E0F2FE"/>
+      <stop offset="0.45" stop-color="#38BDF8"/>
+      <stop offset="1" stop-color="#2563EB"/>
+    </linearGradient>
+    <filter id="glow" x="-16" y="-16" width="88" height="96" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#0284C7" flood-opacity="0.42"/>
+    </filter>
+  </defs>
+  <g filter="url(#glow)">
+    <path d="M30 57C30 57 52 36.7 52 22.8C52 10.2 42.2 3 30 3C17.8 3 8 10.2 8 22.8C8 36.7 30 57 30 57Z" fill="url(#pin)"/>
+    <path d="M30 57C30 57 52 36.7 52 22.8C52 10.2 42.2 3 30 3C17.8 3 8 10.2 8 22.8C8 36.7 30 57 30 57Z" stroke="#BAE6FD" stroke-opacity="0.8" stroke-width="1.4"/>
+    <circle cx="30" cy="23" r="12" fill="#020617" fill-opacity="0.74"/>
+    <path d="M18 31C20.5 26.8 24.7 24.4 30 24.4C35.3 24.4 39.5 26.8 42 31" stroke="#7DD3FC" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="21.5" cy="23.2" r="3.4" fill="#BAE6FD"/>
+    <circle cx="30" cy="18.5" r="4.2" fill="#38BDF8"/>
+    <circle cx="38.5" cy="23.2" r="3.4" fill="#BAE6FD"/>
+    <path d="M23 39L30 27L37 39L30 47L23 39Z" fill="#E0F2FE" fill-opacity="0.92"/>
+  </g>
+  <text x="68" y="43" fill="url(#text)" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="800" letter-spacing="-1.9">SeeWe</text>
+  <path d="M70 50H206" stroke="#38BDF8" stroke-opacity="0.36" stroke-width="2" stroke-linecap="round"/>
+</svg>

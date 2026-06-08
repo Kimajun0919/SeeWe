@@ -11,12 +11,14 @@ type LiveSummaryCardProps = {
 
 export function LiveSummaryCard({ population, lastFetchedAt, isSourceWaiting }: LiveSummaryCardProps) {
   return (
-    <section className="rounded-3xl border border-white/10 bg-white/[0.07] p-5 shadow-2xl shadow-slate-950/20">
+    <section className="rounded-[1.75rem] border border-white/10 bg-white/[0.07] p-4 shadow-2xl shadow-slate-950/20 sm:rounded-3xl sm:p-5">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-        <div>
+        <div className="min-w-0">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-sky-200">현재 권역</p>
-          <h2 className="mt-2 text-2xl font-bold text-white">{population?.areaName || "올림픽공원"}</h2>
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-300">
+          <h2 className="mt-2 break-keep text-xl font-bold text-white sm:text-2xl">
+            {population?.areaName || "올림픽공원"}
+          </h2>
+          <p className="mt-2 max-w-3xl break-keep text-sm leading-6 text-slate-300">
             {population?.congestionMessage || "서울시 공개 데이터를 기다리는 중입니다."}
           </p>
         </div>
@@ -48,8 +50,8 @@ export function LiveSummaryCard({ population, lastFetchedAt, isSourceWaiting }: 
 function SummaryMetric({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
-      <p className="text-xs text-slate-400">{label}</p>
-      <p className="mt-2 text-lg font-semibold text-white">{value}</p>
+      <p className="break-keep text-xs text-slate-400">{label}</p>
+      <p className="mt-2 break-words text-base font-semibold text-white sm:text-lg">{value}</p>
     </div>
   );
 }

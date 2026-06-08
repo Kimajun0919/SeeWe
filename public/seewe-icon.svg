@@ -1,0 +1,25 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">SeeWe</title>
+  <desc id="desc">SeeWe map pin icon</desc>
+  <defs>
+    <linearGradient id="pin" x1="13" y1="5" x2="51" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38BDF8"/>
+      <stop offset="0.55" stop-color="#0EA5E9"/>
+      <stop offset="1" stop-color="#1D4ED8"/>
+    </linearGradient>
+    <filter id="glow" x="-10" y="-8" width="84" height="88" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#0284C7" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="#020617"/>
+  <g filter="url(#glow)">
+    <path d="M32 59C32 59 55 37.9 55 23.5C55 10.5 44.8 3 32 3C19.2 3 9 10.5 9 23.5C9 37.9 32 59 32 59Z" fill="url(#pin)"/>
+    <path d="M32 59C32 59 55 37.9 55 23.5C55 10.5 44.8 3 32 3C19.2 3 9 10.5 9 23.5C9 37.9 32 59 32 59Z" stroke="#BAE6FD" stroke-opacity="0.85" stroke-width="1.5"/>
+    <circle cx="32" cy="24" r="12.5" fill="#020617" fill-opacity="0.74"/>
+    <path d="M20.5 32C23.1 27.6 27.5 25.1 32 25.1C36.5 25.1 40.9 27.6 43.5 32" stroke="#7DD3FC" stroke-width="3.2" stroke-linecap="round"/>
+    <circle cx="23.2" cy="24.2" r="3.5" fill="#BAE6FD"/>
+    <circle cx="32" cy="19.2" r="4.4" fill="#38BDF8"/>
+    <circle cx="40.8" cy="24.2" r="3.5" fill="#BAE6FD"/>
+    <path d="M24.5 40L32 27.5L39.5 40L32 48.5L24.5 40Z" fill="#E0F2FE" fill-opacity="0.92"/>
+  </g>
+</svg>
