@@ -6,7 +6,7 @@ import type { GateEstimate } from "@/types/estimate";
 import type { SeoulCityData, SeoulPopulation } from "@/types/seoul";
 import { useCountdown } from "./useCountdown";
 
-export const LIVE_REFRESH_INTERVAL_MS = 10_000;
+export const LIVE_REFRESH_INTERVAL_MS = 5 * 60 * 1000;
 
 type ApiErrorBody = {
   error?: string;

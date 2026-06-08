@@ -5,7 +5,7 @@ import { normalizeCityData } from "./normalizeCityData";
 import { SeoulApiError } from "./fetchPopulation";
 
 const SEOUL_OPEN_API_BASE_URL = "http://openapi.seoul.go.kr:8088";
-const CACHE_TTL_MS = 10_000;
+const CACHE_TTL_MS = 5 * 60 * 1000;
 
 type CacheEntry = {
   expiresAt: number;

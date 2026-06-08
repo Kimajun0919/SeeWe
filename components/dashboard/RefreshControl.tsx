@@ -24,12 +24,12 @@ export function RefreshControl({
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="min-w-0">
           <p className="break-keep text-sm font-semibold leading-5 text-slate-100">
-            10초마다 서울시 최신 공개 데이터를 확인합니다.
+            5분마다 서울시 최신 공개 데이터를 확인합니다.
           </p>
           <div className="mt-2 grid gap-1 text-xs leading-5 text-slate-300 sm:grid-cols-3 sm:gap-4">
             <span>앱 새로고침: {lastFetchedAt ? formatClock(lastFetchedAt) : "정보없음"}</span>
             <span>서울 원천 시각: {formatSourceTime(sourceUpdatedAt)}</span>
-            <span>다음 자동 확인까지 {nextRefreshIn}초</span>
+            <span>다음 자동 확인까지 {formatRefreshCountdown(nextRefreshIn)}</span>
           </div>
           {isError ? (
             <p className="mt-2 text-xs font-medium text-red-200">
@@ -49,4 +49,15 @@ export function RefreshControl({
       </div>
     </section>
   );
+}
+
+function formatRefreshCountdown(totalSeconds: number): string {
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+
+  if (minutes <= 0) {
+    return `${seconds}초`;
+  }
+
+  return seconds > 0 ? `${minutes}분 ${seconds}초` : `${minutes}분`;
 }
